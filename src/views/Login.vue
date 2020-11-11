@@ -204,11 +204,13 @@ export default {
       width: 320px;
       position: absolute;
       left: 50%;
-      transform: translate(-50%, 20%);
+      top: 50%;
+      transform: translate(-50%, -75%);
       .login-head {
         text-align: center;
         .lgoin-title {
-          font-size: 60px;
+          font-size: 65px;
+          font-family: "Helvetica Neue", Helvetica, Arial, "PingFang SC", "Hiragino Sans GB", "Heiti SC", "Microsoft YaHei", "WenQuanYi Micro Hei", sansserif;
           font-weight: bolder;
           color: #515a6e;
         }
