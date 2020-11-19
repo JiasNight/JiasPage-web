@@ -19,7 +19,7 @@
           <router-link to="/">
             <span class="lgoin-title">J I A S</span>
           </router-link>
-          <router-link to="#">
+          <router-link to="/signup">
             <span class="is-account">没有账户？</span>
           </router-link>
         </div>
@@ -51,7 +51,6 @@
             <Checkbox
               class="remember-check"
               v-model="isRemember"
-              on-change="rememberPasswd"
               >记住密码</Checkbox
             >
             <a href="#" class="forget-passwd">忘记密码？</a>
@@ -81,9 +80,7 @@
               </a>
               <a href="https://gitee.com/auth/github">
                 <Tooltip content="使用github登录" placement="bottom-end">
-                  <li>
-                    <Icon type="logo-linkedin" size="30" color="#000000" />
-                  </li>
+                  <li><Icon type="logo-linkedin" size="30" color="#000000" /></li>
                 </Tooltip>
               </a>
               <a href="https://gitee.com/auth/github">
@@ -142,7 +139,7 @@ export default {
     getCookie() {
       if (document.cookie.length > 0) {
         var arr = document.cookie.split("; ");
-        console.log(arr);
+        // console.log(arr);
         for (var i = 0; i < arr.length; i++) {
           var arr2 = arr[i].split("="); // 再次切割
           // 判断查找相对应的值
@@ -161,7 +158,6 @@ export default {
     },
     signInBtn(loginFormData) {
       if (this.isRemember) {
-        console.log("执行记住密码");
         this.setCookie(loginFormData.userName, loginFormData.userPasswd, 7);
       } else {
         this.clearCookie();
