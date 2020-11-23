@@ -48,9 +48,7 @@
               >
               </Input>
             </FormItem>
-            <Checkbox
-              class="remember-check"
-              v-model="isRemember"
+            <Checkbox class="remember-check" v-model="isRemember"
               >记住密码</Checkbox
             >
             <a href="#" class="forget-passwd">忘记密码？</a>
@@ -80,7 +78,9 @@
               </a>
               <a href="https://gitee.com/auth/github">
                 <Tooltip content="使用github登录" placement="bottom-end">
-                  <li><Icon type="logo-linkedin" size="30" color="#000000" /></li>
+                  <li>
+                    <Icon type="logo-linkedin" size="30" color="#000000" />
+                  </li>
                 </Tooltip>
               </a>
               <a href="https://gitee.com/auth/github">
@@ -175,11 +175,11 @@ export default {
     width: 100%;
     height: 100%;
     position: fixed;
-    background: linear-gradient(
-      0deg,
-      rgba(8, 170, 235, 0.6),
-      rgba(243, 100, 4, 0.8)
-    );
+    // background: linear-gradient(
+    //   0deg,
+    //   rgba(8, 170, 235, 0.5),
+    //   rgba(243, 100, 4, 0.6)
+    // );
     .content-head {
       width: 100%;
       height: 40px;
@@ -206,7 +206,9 @@ export default {
         text-align: center;
         .lgoin-title {
           font-size: 65px;
-          font-family: "Helvetica Neue", Helvetica, Arial, "PingFang SC", "Hiragino Sans GB", "Heiti SC", "Microsoft YaHei", "WenQuanYi Micro Hei", sansserif;
+          font-family: "Helvetica Neue", Helvetica, Arial, "PingFang SC",
+            "Hiragino Sans GB", "Heiti SC", "Microsoft YaHei",
+            "WenQuanYi Micro Hei", sansserif;
           font-weight: bolder;
           color: #515a6e;
         }

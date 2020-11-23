@@ -50,6 +50,11 @@ export default {
     position: fixed;
     top: 0;
     left: 0;
+    background: linear-gradient(
+      0deg,
+      rgba(8, 170, 235, 0.6),
+      rgba(243, 100, 4, 0.8)
+    );
   }
 }
 
