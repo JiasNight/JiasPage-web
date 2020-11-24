@@ -48,6 +48,19 @@
               >
               </Input>
             </FormItem>
+            <FormItem prop="verificationCode">
+              <Input
+                class="ver-code-input"
+                type="text"
+                prefix="ios-barcode-outline"
+                size="large"
+                clearable
+                placeholder="Sidentify"
+              >
+              </Input>
+              <!-- 验证码 -->
+              <v-verCode></v-verCode>
+            </FormItem>
             <Checkbox class="remember-check" v-model="isRemember"
               >记住密码</Checkbox
             >
@@ -97,6 +110,7 @@
 </template>
 
 <script>
+import VerificationCode from "@/components/VerificationCode";
 export default {
   data() {
     return {
@@ -118,8 +132,14 @@ export default {
             trigger: "blur",
           },
         ],
+        verificationCode: [
+          { required: true, message: "请输入验证码！", trigger: "blur" },
+        ],
       },
     };
+  },
+  components: {
+    "v-verCode": VerificationCode,
   },
   mounted() {
     // 读取cookie里的用户名和密码
@@ -241,6 +261,10 @@ export default {
         .login-style ::v-deep .ivu-btn {
           position: absolute;
           top: 35px;
+        }
+        .login-style .ver-code-input {
+          width: 180px;
+          display: inline-block;
         }
         .remember-check {
           position: absolute;

@@ -37,6 +37,7 @@ export default {
   .back {
     width: 100%;
     height: 100%;
+    overflow: scroll;
     position: fixed;
     top: 0;
     left: 0;
@@ -45,8 +46,8 @@ export default {
     animation: coverZoom linear infinite 60s;
   }
   .container {
-    width: 100%;
-    height: 100%;
+    width: 101%;
+    height: 101%;
     position: fixed;
     top: 0;
     left: 0;
