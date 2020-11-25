@@ -2,7 +2,6 @@
   <div class="content">
     <canvas
       ref="content"
-      id="content"
       :width="contentWidth"
       :height="contentHeight"
     ></canvas>
@@ -16,22 +15,57 @@ export default {
       type: String,
       default: "asdf",
     },
+    fontSizeMin: {
+      type: Number,
+      default: 60,
+    },
+    fontSizeMax: {
+      type: Number,
+      default: 30,
+    },
+    backgroundColorMin: {
+      type: Number,
+      default: 150,
+    },
+    backgroundColorMax: {
+      type: Number,
+      default: 200,
+    },
+    colorMin: {
+      type: Number,
+      default: 50,
+    },
+    colorMax: {
+      type: Number,
+      default: 150,
+    },
+    lineColorMin: {
+      type: Number,
+      default: 50,
+    },
+    lineColorMax: {
+      type: Number,
+      default: 150,
+    },
+    dotColorMin: {
+      type: Number,
+      default: 50,
+    },
+    dotColorMax: {
+      type: Number,
+      default: 150,
+    },
+    contentWidth: {
+      type: Number,
+      default: 120,
+    },
+    contentHeight: {
+      type: Number,
+      default: 40,
+    },
   },
-  data() {
-    return {
-      fontSizeMin: 60,
-      fontSizeMax: 30,
-      backgroundColorMin: 150,
-      backgroundColorMax: 200,
-      colorMin: 50,
-      colorMax: 150,
-      lineColorMin: 50,
-      lineColorMax: 150,
-      dotColorMin: 0,
-      dotColorMax: 250,
-      contentWidth: 120,
-      contentHeight: 40,
-    };
+  mounted() {
+    this.drawPic();
   },
   methods: {
     // 生成一个随机数
@@ -54,11 +88,13 @@ export default {
       ctx.fillStyle = this.randomColor(
         this.backgroundColorMin,
         this.backgroundColorMax
-      ); //图形填充颜色设置
+      );
+      //图形填充颜色设置
       ctx.strokeStyle = this.randomColor(
         this.backgroundColorMin,
         this.backgroundColorMax
-      ); //图形轮廓的颜色设置
+      );
+      //图形轮廓的颜色设置
       ctx.fillRect(0, 0, this.contentWidth, this.contentHeight); //绘制一个填充的矩形 0 0 width height x起点 y起点  宽 高
       ctx.strokeRect(0, 0, this.contentWidth, this.contentHeight); // 绘制一个矩形边框 0 0 width height x起点 y起点  宽 高
       // ctx.clearRect(50,0,this.contentWidth,this.contentHeight)  //清除指定矩形区域，清除部分完全透明
@@ -71,15 +107,19 @@ export default {
     },
     drawText(ctx, txt, i) {
       ctx.fillStyle = this.randomColor(this.colorMin, this.colorMax);
+      //字体大小
       ctx.font =
-        this.randomNum(this.fontSizeMin, this.fontSizeMax) + "px SimHei"; //字体大小
-      ctx.textBaseline = "alphabetic"; //基线对齐
+        this.randomNum(this.fontSizeMin, this.fontSizeMax) + "px SimHei";
+      //基线对齐
+      ctx.textBaseline = "alphabetic";
       let x = (i + 1) * (this.contentWidth / (this.identifyCode.length + 1));
       let y = this.randomNum(this.fontSizeMax, this.contentHeight - 5);
+      //修改坐标原点和旋转角度
       var deg = this.randomNum(-45, 45);
-      // 修改坐标原点和旋转角度
-      ctx.translate(x, y); //移动不同位置  参数偏移量
-      ctx.rotate((deg * Math.PI) / 180); //旋转 参数角度
+      //移动不同位置  参数偏移量
+      ctx.translate(x, y);
+      //旋转 参数角度
+      ctx.rotate((deg * Math.PI) / 180);
       ctx.fillText(txt, 0, 0);
       // 恢复坐标原点和旋转角度
       ctx.rotate((-deg * Math.PI) / 180);
@@ -92,15 +132,18 @@ export default {
           this.lineColorMin,
           this.lineColorMax
         );
-        ctx.beginPath(); //新建一条路径
+        //新建一条路径
+        ctx.beginPath();
         ctx.moveTo(
           this.randomNum(0, this.contentWidth),
           this.randomNum(0, this.contentHeight)
-        ); //设置起点x,y
+        );
+        //设置起点x,y
         ctx.lineTo(
           this.randomNum(0, this.contentWidth),
           this.randomNum(0, this.contentHeight)
-        ); //绘制直线 x,y 一条当前位置到x,y点的直线
+        );
+        //绘制直线 x,y 一条当前位置到x,y点的直线
         ctx.stroke(); // 通过线条绘制图形轮廓
         // ctx.closePath() //结束闭合路径
       }
@@ -127,18 +170,9 @@ export default {
       this.drawPic();
     },
   },
-  mounted() {
-    this.drawPic();
-  },
 };
 </script>
 
 <style lang="scss" scoped>
-.content {
-  width: 130px;
-  height: 40px;
-  //   background-color: aqua;
-  float: right;
-}
 </style>
 

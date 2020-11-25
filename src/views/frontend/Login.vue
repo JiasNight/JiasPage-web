@@ -48,18 +48,23 @@
               >
               </Input>
             </FormItem>
-            <FormItem prop="verificationCode">
+            <FormItem prop="identifyCode">
               <Input
                 class="ver-code-input"
                 type="text"
                 prefix="ios-barcode-outline"
                 size="large"
                 clearable
+                v-model="loginFormData.identifyCode"
                 placeholder="Sidentify"
               >
               </Input>
               <!-- 验证码 -->
-              <v-verCode></v-verCode>
+              <v-identifyCode
+                class="ver-code"
+                :identifyCode="identifyCode"
+                @click.native="makeCode()"
+              ></v-identifyCode>
             </FormItem>
             <Checkbox class="remember-check" v-model="isRemember"
               >记住密码</Checkbox
@@ -110,14 +115,27 @@
 </template>
 
 <script>
-import VerificationCode from "@/components/VerificationCode";
+import IdentifyCode from "@/components/IdentifyCode";
 export default {
   data() {
+    const identifyCodeCheck = (rule, value, callback) => {
+      console.log("value:" + value);
+      if (value === "") {
+        callback(new Error("请输入验证码!"));
+      } else if (value !== this.identifyCode) {
+        callback(new Error("验证码输入错误!"));
+        // callback(new Error(value));
+      } else {
+        callback();
+      }
+    };
     return {
       isRemember: false, // 是否记住密码
+      identifyCode: "",
       loginFormData: {
         userName: "",
         userPasswd: "",
+        identifyCode: "",
       },
       loginRules: {
         userName: [
@@ -132,18 +150,24 @@ export default {
             trigger: "blur",
           },
         ],
-        verificationCode: [
-          { required: true, message: "请输入验证码！", trigger: "blur" },
+        identifyCode: [
+          {
+            required: true,
+            validator: identifyCodeCheck,
+            trigger: "blur",
+          },
         ],
       },
     };
   },
   components: {
-    "v-verCode": VerificationCode,
+    "v-identifyCode": IdentifyCode,
   },
   mounted() {
     // 读取cookie里的用户名和密码
     this.getCookie();
+    // 验证码生成
+    this.makeCode();
   },
   methods: {
     // 设置cookie
@@ -176,6 +200,19 @@ export default {
     clearCookie() {
       this.setCookie("", "", -1); // 修改2值都为空，天数为负1天就好了
     },
+    //生成验证码
+    makeCode() {
+      this.identifyCode = "";
+      for (let i = 0; i < 4; i++) {
+        let identifyCodes = "0123456789abcdefjhijklinopqrsduvwxyz";
+        this.identifyCode +=
+          identifyCodes[
+            Math.floor(Math.random() * (identifyCodes.length - 0) + 0)
+          ];
+      }
+      console.log(this.identifyCode);
+    },
+    // 登录按钮
     signInBtn(loginFormData) {
       if (this.isRemember) {
         this.setCookie(loginFormData.userName, loginFormData.userPasswd, 7);
@@ -265,6 +302,11 @@ export default {
         .login-style .ver-code-input {
           width: 180px;
           display: inline-block;
+        }
+        .login-style .ver-code {
+          float: right;
+          margin-right: 10px;
+          cursor: pointer;
         }
         .remember-check {
           position: absolute;
