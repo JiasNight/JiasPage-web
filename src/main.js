@@ -2,6 +2,10 @@ import Vue from 'vue'
 import App from './App'
 import router from './router'
 import store from './store'
+// 导入axios
+import axios from 'axios'
+// 导入qs
+import qs from 'qs'
 // 引入iview依赖
 import ViewUI from 'view-design'
 // 引入iview css样式
@@ -11,6 +15,8 @@ import './assets/css/global.css'
 
 Vue.config.productionTip = false
 Vue.use(ViewUI)
+Vue.prototype.$axios = axios
+Vue.prototype.qs = qs
 
 new Vue({
   router,

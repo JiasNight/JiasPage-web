@@ -1,21 +1,21 @@
 <template>
-  <div class="signUp-box">
+  <div class="login-box">
     <!-- 标题 -->
-    <div class="signUp-head">
+    <div class="login-head">
       <router-link to="/">
-        <span class="signUp-title">J I A S</span>
+        <span class="lgoin-title">J I A S</span>
       </router-link>
-      <router-link to="/login">
-        <span class="go-login">直接登录？</span>
+      <router-link to="/signup">
+        <span class="is-account">没有账户？</span>
       </router-link>
     </div>
-    <div class="signUp-form">
+    <div class="login-form">
       <!-- 登录表单 -->
       <Form
         ref="formData"
-        class="signUp-style"
-        :model="signUpFormData"
-        :rules="signUpRules"
+        class="login-style"
+        :model="loginFormData"
+        :rules="loginRules"
       >
         <FormItem prop="userName">
           <Input
@@ -23,7 +23,7 @@
             prefix="ios-contact-outline"
             size="large"
             clearable
-            v-model="signUpFormData.userName"
+            v-model="loginFormData.userName"
             placeholder="Username"
           >
           </Input>
@@ -34,60 +34,99 @@
             prefix="ios-lock-outline"
             size="large"
             password
-            v-model="signUpFormData.userPasswd"
+            v-model="loginFormData.userPasswd"
             placeholder="Password"
           >
           </Input>
         </FormItem>
-        <FormItem prop="againPasswd">
+        <FormItem prop="identifyCode">
           <Input
-            type="password"
-            prefix="ios-lock-outline"
+            class="ver-code-input"
+            type="text"
+            prefix="ios-barcode-outline"
             size="large"
-            password
-            v-model="signUpFormData.againPasswd"
-            placeholder="Password"
+            clearable
+            v-model="loginFormData.identifyCode"
+            placeholder="Sidentify"
           >
           </Input>
+          <!-- 验证码 -->
+          <v-identifyCode
+            class="ver-code"
+            :identifyCode="identifyCode"
+            @click.native="makeCode()"
+          ></v-identifyCode>
         </FormItem>
-
+        <Checkbox class="remember-check" v-model="isRemember"
+          >记住密码</Checkbox
+        >
+        <a href="#" class="forget-passwd">忘记密码？</a>
         <FormItem>
           <Button
             type="primary"
             shape="circle"
             long
             size="large"
-            @click="signUpBtn(signUpFormData)"
-            >注册</Button
+            @click="signInBtn(loginFormData)"
+            >登录</Button
           >
         </FormItem>
       </Form>
+      <div class="login-other">
+        <Divider>第三方登录</Divider>
+        <ul>
+          <a href="https://gitee.com/auth/github">
+            <Tooltip content="使用github登录" placement="bottom-end">
+              <li><Icon type="logo-github" size="30" color="#000000" /></li>
+            </Tooltip>
+          </a>
+          <a href="https://gitee.com/auth/github">
+            <Tooltip content="使用github登录" placement="bottom-end">
+              <li><Icon type="logo-apple" size="30" color="#000000" /></li>
+            </Tooltip>
+          </a>
+          <a href="https://gitee.com/auth/github">
+            <Tooltip content="使用github登录" placement="bottom-end">
+              <li>
+                <Icon type="logo-linkedin" size="30" color="#000000" />
+              </li>
+            </Tooltip>
+          </a>
+          <a href="https://gitee.com/auth/github">
+            <Tooltip content="使用github登录" placement="bottom-end">
+              <li><Icon type="logo-tux" size="30" color="#000000" /></li>
+            </Tooltip>
+          </a>
+        </ul>
+      </div>
     </div>
   </div>
 </template>
 
 <script>
+import IdentifyCode from "@/components/IdentifyCode";
 export default {
   data() {
-    const passwdAgainCheck = (rule, value, callback) => {
+    const identifyCodeCheck = (rule, value, callback) => {
       if (value === "") {
-        callback(new Error("请输入密码确认!"));
-      } else if (value !== this.signUpFormData.userPasswd) {
-        callback(new Error("密码确认错误!"));
+        callback(new Error("请输入验证码!"));
+      } else if (value !== this.identifyCode) {
+        callback(new Error("验证码输入错误!"));
       } else {
         callback();
       }
     };
     return {
-      signUpFormData: {
+      isRemember: false, // 是否记住密码
+      identifyCode: "",
+      loginFormData: {
         userName: "",
         userPasswd: "",
-        againPasswd: "",
         identifyCode: "",
       },
-      signUpRules: {
+      loginRules: {
         userName: [
-          { required: true, message: "请输入用户名！", trigger: "blur" },
+          { required: true, message: "请输入登录用户名！", trigger: "blur" },
         ],
         userPasswd: [
           { required: true, message: "请输入用户密码！", trigger: "blur" },
@@ -98,17 +137,19 @@ export default {
             trigger: "blur",
           },
         ],
-        againPasswd: [
+        identifyCode: [
           {
             required: true,
-            validator: passwdAgainCheck,
+            validator: identifyCodeCheck,
             trigger: "blur",
           },
         ],
       },
     };
   },
-  components: {},
+  components: {
+    "v-identifyCode": IdentifyCode,
+  },
   mounted() {
     // 读取cookie里的用户名和密码
     this.getCookie();
@@ -159,21 +200,24 @@ export default {
       // console.log(this.identifyCode);
     },
     // 登录按钮
-    signUpBtn(signUpFormData) {
+    signInBtn(loginFormData) {
       this.$refs.formData.validate((valid) => {
         if (valid) {
+          if (this.isRemember) {
+            this.setCookie(loginFormData.userName, loginFormData.userPasswd, 7);
+          } else {
+            this.clearCookie();
+          }
           this.$axios
             .get("https://api.coindesk.com/v1/bpi/currentprice.json")
             .then((res) => {
               console.log(res.data);
               if (res.status === 200) {
-                this.$Message.info("注册成功");
+                this.$Message.info("登录成功");
               } else {
-                this.$Message.info("注册失败");
+                this.$Message.info("登录失败");
               }
             });
-        } else {
-          console.log(signUpFormData);
         }
       });
     },
@@ -182,17 +226,17 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.signUp-box {
+.login-box {
   width: 300px;
   position: absolute;
   left: 50%;
   top: 50%;
   transform: translate(-50%, -70%);
-  .signUp-head {
+  .login-head {
     width: 100%;
     height: 100%;
     text-align: center;
-    .signUp-title {
+    .lgoin-title {
       font-size: 65px;
       font-family: "Helvetica Neue", Helvetica, Arial, "PingFang SC",
         "Hiragino Sans GB", "Heiti SC", "Microsoft YaHei", "WenQuanYi Micro Hei",
@@ -200,35 +244,73 @@ export default {
       font-weight: bolder;
       color: #515a6e;
     }
-    .signUp-title:hover {
+    .lgoin-title:hover {
       color: #515a6e;
     }
-    .go-login {
+    .is-account {
       position: absolute;
       right: 10px;
       top: 100px;
       color: cornsilk;
     }
-    .go-login:hover {
+    .is-account:hover {
       color: #00a2e8;
     }
   }
-  .signUp-form {
+  .login-form {
     width: 100%;
     position: relative;
     top: 40px;
     // 使用::v-deep修改控制iview默认样式
-    .signUp-style ::v-deep .ivu-form-item {
+    .login-style ::v-deep .ivu-form-item {
       height: 50px;
     }
-    .signUp-style ::v-deep .ivu-input {
+    .login-style ::v-deep .ivu-input {
       border-radius: 25px;
       background-color: #fbfbfb;
       opacity: 0.9;
     }
-    .signUp-style ::v-deep .ivu-btn {
+    .login-style ::v-deep .ivu-btn {
       position: absolute;
       top: 35px;
+    }
+    .login-style .ver-code-input {
+      width: 160px;
+      display: inline-block;
+    }
+    .login-style .ver-code {
+      float: right;
+      margin-right: 10px;
+      cursor: pointer;
+    }
+    .remember-check {
+      position: absolute;
+      left: 20px;
+    }
+    .forget-passwd {
+      position: absolute;
+      right: 10px;
+      color: #595959;
+    }
+    .forget-passwd:hover {
+      color: #c9cccf;
+    }
+    // 第三方登录
+    .login-other {
+      width: 90%;
+      position: absolute;
+      left: 50%;
+      transform: translate(-50%, 10%);
+      ul {
+        list-style: none;
+        li {
+          width: 30px;
+          height: 30px;
+          float: left;
+          margin-left: 35px;
+          border-radius: 50%;
+        }
+      }
     }
   }
 }

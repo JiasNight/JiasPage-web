@@ -1,26 +1,37 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import Home from '../views/Home.vue'
-import Login from '../views/frontend/Login.vue'
-import Signup from '../views/frontend/Signup.vue'
+import Home from '../views/frontend/Home.vue'
+import SignIn from '../views/frontend/SignIn.vue'
+import SignUp from '../views/frontend/SignUp.vue'
+import adminIndex from '../views/backend/index.vue'
 
 Vue.use(VueRouter)
 
 const routes = [
   {
+    // 前台路由
     path: '/',
     name: 'Home',
-    component: Home
+    component: Home,
+    children: [
+      {
+        path: '/login',
+        name: 'SignIn',
+        component: SignIn
+      },
+      {
+        path: '/signup',
+        name: 'SignUp',
+        component: SignUp
+      }
+    ]
   },
   {
-    path: '/login',
-    name: 'Login',
-    component: Login
-  },
-  {
-    path: '/signup',
-    name: 'Signup',
-    component: Signup
+    // 后台路由
+    path: '/admin',
+    name: 'Admin',
+    component: adminIndex,
+    children: []
   }
   // {
   //   path: '/about',

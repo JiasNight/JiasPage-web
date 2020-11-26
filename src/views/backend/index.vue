@@ -1,6 +1,7 @@
 <template>
-  <div>
-    <router-view></router-view>
+  <div class="admin">
+      <h1>这是后台</h1>
+    </div>
   </div>
 </template>
 
