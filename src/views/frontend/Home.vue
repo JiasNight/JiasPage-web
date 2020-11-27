@@ -26,7 +26,7 @@ import backgroundImg from "../../../public/back.jpg";
 export default {
   data() {
     return {
-      BackImg: backgroundImg,
+      BackImg: backgroundImg
     };
   },
   mounted() {

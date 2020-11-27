@@ -21,7 +21,7 @@ export default {
     },
     fontSizeMax: {
       type: Number,
-      default: 30,
+      default: 40,
     },
     backgroundColorMin: {
       type: Number,
