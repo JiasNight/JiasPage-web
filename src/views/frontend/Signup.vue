@@ -10,7 +10,7 @@
       </router-link>
     </div>
     <div class="signUp-form">
-      <!-- 登录表单 -->
+      <!-- 注册表单 -->
       <Form
         ref="formData"
         class="signUp-style"
@@ -109,56 +109,9 @@ export default {
     };
   },
   components: {},
-  mounted() {
-    // 读取cookie里的用户名和密码
-    this.getCookie();
-    // 验证码生成
-    this.makeCode();
-  },
+  mounted() {},
   methods: {
-    // 设置cookie
-    setCookie(name, pwd, exdays) {
-      var exdate = new Date();
-      exdate.setTime(exdate.getTime() + 24 * 60 * 60 * 1000 * exdays); //保存的天数
-      document.cookie =
-        "userName=" + name + ";path=/;expires=" + exdate.toLocaleString();
-      document.cookie =
-        "userPasswd=" + pwd + ";path=/;expires=" + exdate.toLocaleString();
-    },
-    // 获取cookie
-    getCookie() {
-      if (document.cookie.length > 0) {
-        var arr = document.cookie.split("; ");
-        // console.log(arr);
-        for (var i = 0; i < arr.length; i++) {
-          var arr2 = arr[i].split("="); // 再次切割
-          // 判断查找相对应的值
-          if (arr2[0] == "userName") {
-            // 保存到保存数据的地方
-            this.loginFormData.userName = arr2[1];
-          } else if (arr2[0] == "userPasswd") {
-            this.loginFormData.userPasswd = arr2[1];
-          }
-        }
-      }
-    },
-    // 删除cookie
-    clearCookie() {
-      this.setCookie("", "", -1); // 修改2值都为空，天数为负1天就好了
-    },
-    //生成验证码
-    makeCode() {
-      this.identifyCode = "";
-      for (let i = 0; i < 4; i++) {
-        let identifyCodes = "0123456789abcdefjhijklinopqrsduvwxyz";
-        this.identifyCode +=
-          identifyCodes[
-            Math.floor(Math.random() * (identifyCodes.length - 0) + 0)
-          ];
-      }
-      // console.log(this.identifyCode);
-    },
-    // 登录按钮
+    // 注册按钮
     signUpBtn(signUpFormData) {
       this.$refs.formData.validate((valid) => {
         if (valid) {
