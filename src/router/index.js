@@ -10,14 +10,26 @@ Vue.use(VueRouter)
 const routes = [
   {
     // 前台路由
-    path: '/',
+    path: '*',
     name: 'Home',
     component: Home,
     children: [
       {
-        path: '/login',
-        name: 'SignIn',
-        component: SignIn
+        path: '/',
+        name: 'Home',
+        component: Home,
+        children : [
+          {
+            path: '/login',
+            name: 'SignIn',
+            component: SignIn
+          },
+          {
+            path: '/signup',
+            name: 'SignUp',
+            component: SignUp
+          }
+        ]
       },
       {
         path: '/signup',

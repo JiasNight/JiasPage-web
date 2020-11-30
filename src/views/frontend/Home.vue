@@ -1,45 +1,67 @@
 <template>
   <div class="main">
-    <div class="back" ref="BackImg"></div>
+    <div class="back" ref="backImg"></div>
     <div class="containers">
       <!-- 头部部分 -->
-      <div class="content-head">
-        <div class="head-left">
-          <router-link to="/">
-            <Icon type="md-menu" size="40" color="#404040" />
-          </router-link>
-        </div>
-        <div class="head-right">
-          <router-link to="/login">
-            <Icon type="md-cafe" size="40" color="#404040" />
-          </router-link>
-        </div>
-      </div>
+      <v-header></v-header>
+      <v-rotation-img></v-rotation-img>
       <!-- 路由 -->
       <router-view></router-view>
+      <div class="content-body"></div>
+      <!-- <div class="loop-img">
+        
+      </div> -->
+    </div>
+    <div class="stars">
+      <div
+        v-for="(item, index) in starsCount"
+        :key="index"
+        ref="star"
+        class="star"
+      ></div>
     </div>
   </div>
 </template>
 
 <script>
-import backgroundImg from "../../../public/back.jpg";
+import BackgroundImg from "../../../public/back.jpg";
+import Header from "@/views/frontend/Header";
+import RotationImg from "@/components/RotationImg";
 export default {
   data() {
     return {
-      BackImg: backgroundImg
+      backgroundImgUrl: BackgroundImg,
     };
+  },
+  components: {
+    "v-header": Header,
+    "v-rotation-img": RotationImg,
   },
   mounted() {
     this.setBackImg();
   },
   methods: {
     setBackImg() {
-      // console.log('执行')
-      let backImg = this.$refs.BackImg.style;
-      backImg.backgroundImage = "url(" + this.BackImg + ")";
+      let backImg = this.$refs.backImg.style;
+      backImg.backgroundImage = "url(" + this.backgroundImgUrl + ")";
       backImg.backgroundSize = "cover";
       backImg.backgroundRepeat = "no-repeat";
       backImg.backgroundAttachment = "fixed";
+    },
+    // HTML星星背景方法
+    starsBackgroundFun() {
+      let _this = this;
+      let starArr = this.$refs.star;
+      // 遍历添加样式
+      starArr.forEach((item) => {
+        var sf = 0.2 + Math.random() * 1;
+        var thisDistance = _this.distance + Math.random() * 300;
+        item.style.transformOrigin = `0 0 ${thisDistance}px`;
+        item.style.transform = `translate3d(0,0,-${thisDistance}px) rotateY(${
+          Math.random() * 360
+        }deg) rotateX(${Math.random() * -50}deg) scale(${sf},${sf})`;
+        item.style.borderRadius = "50%";
+      });
     },
   },
 };
@@ -71,22 +93,38 @@ export default {
       rgba(8, 170, 235, 0.6),
       rgba(243, 100, 4, 0.8)
     );
-    .content-head {
-      width: 100%;
-      height: 35px;
-      background-color: rgba(18, 18, 18, 0.1);
-      .head-left {
-        position: absolute;
-        left: 20px;
-      }
-      .head-right {
-        position: absolute;
-        right: 20px;
+    .content-body {
+      .body-img {
+        height: 350px;
+        .img-loop {
+          height: 350px;
+          // background-color: aqua;
+          img {
+            width: 100%;
+          }
+        }
       }
     }
-    .content-head:hover {
-      background-color: rgba(18, 18, 18, 0.2);
-    }
+  }
+  /* 星星样式 */
+  .stars {
+    transform: perspective(500px);
+    transform-style: preserve-3d;
+    position: absolute;
+    bottom: 0;
+    perspective-origin: 50% 100%;
+    left: 50%;
+    animation: rotateStar 300s infinite linear;
+  }
+  .star {
+    width: 2px;
+    height: 2px;
+    background: #f7f7b6;
+    position: absolute;
+    top: 0;
+    left: 0;
+    backface-visibility: hidden;
+    border-radius: 50%;
   }
 }
 
@@ -117,6 +155,37 @@ export default {
   }
   50% {
     -webkit-transform: scale(1.24);
+  }
+}
+
+/* 星星动画 */
+@keyframes rotateStar {
+  0% {
+    transform: perspective(400px) rotateZ(20deg) rotateX(-40deg) rotateY(0);
+  }
+  100% {
+    transform: perspective(400px) rotateZ(20deg) rotateX(-40deg)
+      rotateY(-360deg);
+  }
+}
+
+@-webkit-keyframes rotateStar {
+  0% {
+    transform: perspective(400px) rotateZ(20deg) rotateX(-40deg) rotateY(0);
+  }
+  100% {
+    transform: perspective(400px) rotateZ(20deg) rotateX(-40deg)
+      rotateY(-360deg);
+  }
+}
+
+@-moz-keyframes rotateStar {
+  0% {
+    transform: perspective(400px) rotateZ(20deg) rotateX(-40deg) rotateY(0);
+  }
+  100% {
+    transform: perspective(400px) rotateZ(20deg) rotateX(-40deg)
+      rotateY(-360deg);
   }
 }
 </style>
