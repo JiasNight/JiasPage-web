@@ -12,10 +12,10 @@
         </li>
         <!-- 左右按钮 -->
         <a class="btn-prev" @click="prevBtn()" v-show="showBtn"
-          ><Icon type="ios-arrow-back" size="60" color="black"
+          ><Icon type="ios-arrow-back" color="black"
         /></a>
         <a class="btn-next" @click="nextBtn()" v-show="showBtn"
-          ><Icon type="ios-arrow-forward" size="60" color="black"
+          ><Icon type="ios-arrow-forward" color="black"
         /></a>
       </div>
     </div>
@@ -116,7 +116,7 @@ export default {
 <style lang="scss" scoped>
 .content-box {
   width: 100%;
-  height: 280px;
+  height: 250px;
   position: relative;
   top: 60px;
   .content-rotaimg {
@@ -141,15 +141,17 @@ export default {
       }
       .btn-prev {
         position: absolute;
-        left: 80px;
-        top: 40%;
+        left: 5%;
+        top: 30%;
         z-index: 3;
+        font-size: 50px;
       }
       .btn-next {
         position: absolute;
-        right: 80px;
-        top: 40%;
+        right: 5%;
+        top: 30%;
         z-index: 3;
+        font-size: 50px;
       }
       .active {
         transform: translate3d(-50%, 0, 0) scaleX(1.05) scaleY(1.03);
@@ -157,13 +159,13 @@ export default {
         z-index: 2;
       }
       .prev {
-        transform: translate3d(-90%, 0, -50px) scaleY(0.9);
+        transform: translate3d(-90%, 0, -100px) scaleY(0.9);
         transition: 1s;
         opacity: 0.5;
         z-index: 1;
       }
       .next {
-        transform: translate3d(-10%, 0, -50px) scaleY(0.9);
+        transform: translate3d(-10%, 0, -100px) scaleY(0.9);
         transition: 1s;
         opacity: 0.5;
         z-index: 1;
@@ -184,6 +186,62 @@ export default {
       cursor: pointer;
       background-color: red;
       border-radius: 10%;
+    }
+  }
+}
+
+// 大屏幕
+@media (min-width: 1600px) {
+  .content-box {
+    height: 280px;
+    .img-list .btn-prev,
+    .btn-next {
+      font-size: 60px;
+    }
+  }
+}
+
+// 平板电脑和小屏电脑之间的分辨率
+@media (min-width: 768px) and (max-width: 979px) {
+  .content-box {
+    height: 160px;
+    .content-rotaimg {
+      .img-list {
+        .btn-prev,
+        .btn-next {
+          font-size: 40px;
+        }
+      }
+    }
+  }
+}
+
+// 横向放置的手机和竖向放置的平板之间的分辨率
+@media (max-width: 767px) {
+  .content-box {
+    height: 130px;
+    .content-rotaimg {
+      .img-list {
+        .btn-prev,
+        .btn-next {
+          font-size: 30px;
+        }
+      }
+    }
+  }
+}
+
+// 横向放置的手机及分辨率更小的设备
+@media (max-width: 480px) {
+  .content-box {
+    height: 90px;
+    .content-rotaimg {
+      .img-list {
+        .btn-prev,
+        .btn-next {
+          font-size: 20px;
+        }
+      }
     }
   }
 }

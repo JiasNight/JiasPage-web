@@ -1,24 +1,13 @@
 <template>
-  <div class="main">
+  <div class="containers">
     <div class="back" ref="backImg"></div>
-    <div class="containers">
+    <div class="contents">
       <!-- 头部部分 -->
       <v-header></v-header>
+      <!-- 轮播图 -->
       <v-rotation-img></v-rotation-img>
-      <!-- 路由 -->
-      <router-view></router-view>
+      <!-- <Divider></Divider> -->
       <div class="content-body"></div>
-      <!-- <div class="loop-img">
-        
-      </div> -->
-    </div>
-    <div class="stars">
-      <div
-        v-for="(item, index) in starsCount"
-        :key="index"
-        ref="star"
-        class="star"
-      ></div>
     </div>
   </div>
 </template>
@@ -48,27 +37,12 @@ export default {
       backImg.backgroundRepeat = "no-repeat";
       backImg.backgroundAttachment = "fixed";
     },
-    // HTML星星背景方法
-    starsBackgroundFun() {
-      let _this = this;
-      let starArr = this.$refs.star;
-      // 遍历添加样式
-      starArr.forEach((item) => {
-        var sf = 0.2 + Math.random() * 1;
-        var thisDistance = _this.distance + Math.random() * 300;
-        item.style.transformOrigin = `0 0 ${thisDistance}px`;
-        item.style.transform = `translate3d(0,0,-${thisDistance}px) rotateY(${
-          Math.random() * 360
-        }deg) rotateX(${Math.random() * -50}deg) scale(${sf},${sf})`;
-        item.style.borderRadius = "50%";
-      });
-    },
   },
 };
 </script>
 
 <style lang="scss" scoped>
-.main {
+.containers {
   width: 100%;
   height: 100%;
   .back {
@@ -82,7 +56,7 @@ export default {
     bottom: 0;
     animation: coverZoom linear infinite 60s;
   }
-  .containers {
+  .contents {
     width: 101%;
     height: 101%;
     position: fixed;
