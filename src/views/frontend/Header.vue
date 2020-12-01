@@ -1,18 +1,19 @@
 <template>
   <div class="content-head">
     <div class="head-box">
-      <div v-for="(item, i) in menus" :key="i">{{ item }}</div>
+      <!-- <div v-for="(item, i) in menus" :key="i">{{ item }}</div> -->
+      <div class="head-logo">
+        <router-link to="/"
+          ><img src="../../assets/logo.png" alt="logo"
+        /></router-link>
+      </div>
+      <div class="head-name">
+        <router-link to="/">
+          <span>JiasPage</span>
+        </router-link>
+      </div>
+      <div class="head-search">搜索框</div>
     </div>
-    <!-- <div class="head-left">
-      <router-link to="/">
-        <Icon type="md-menu" size="50" color="#404040" />
-      </router-link>
-    </div>
-    <div class="head-right">
-      <router-link to="/login">
-        <Icon type="md-cafe" size="50" color="#404040" />
-      </router-link>
-    </div> -->
   </div>
 </template>
 
@@ -35,22 +36,35 @@ export default {
   border-bottom: 1px #eee solid;
   background-color: rgba(18, 18, 18, 0.1);
   .head-box {
-    width: 80%;
+    width: 70%;
     height: 100%;
     position: absolute;
-    // background-color: aqua;
     left: 50%;
     transform: translate(-50%);
     display: grid;
-    grid-template-columns: repeat(10, 1fr);
+    grid-template-columns: repeat(9, 1fr);
+    justify-items: center;
+    align-items: center;
+    // background-color: aqua;
+    .head-logo {
+      width: 50px;
+      height: 50px;
+      justify-self: end;
+      img {
+        width: 100%;
+        height: 100%;
+      }
+    }
+    .head-name {
+      span {
+        font-size: 32px;
+        font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", serif;
+        text-align: center;
+        color: #eee;
+        justify-self: start;
+        text-decoration: none;
+      }
+    }
   }
-  // .head-left {
-  //   position: absolute;
-  //   left: 20px;
-  // }
-  // .head-right {
-  //   position: absolute;
-  //   right: 20px;
-  // }
 }
 </style>

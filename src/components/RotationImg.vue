@@ -12,10 +12,10 @@
         </li>
         <!-- 左右按钮 -->
         <a class="btn-prev" @click="prevBtn()" v-show="showBtn"
-          ><Icon type="ios-arrow-back" color="black"
+          ><Icon type="ios-arrow-back" color="#aaa"
         /></a>
         <a class="btn-next" @click="nextBtn()" v-show="showBtn"
-          ><Icon type="ios-arrow-forward" color="black"
+          ><Icon type="ios-arrow-forward" color="#aaa"
         /></a>
       </div>
     </div>
@@ -116,7 +116,7 @@ export default {
 <style lang="scss" scoped>
 .content-box {
   width: 100%;
-  height: 280px;
+  height: 250px;
   position: relative;
   top: 60px;
   .content-rotaimg {
@@ -128,7 +128,7 @@ export default {
     .img-list {
       height: 100%;
       li {
-        width: 60%;
+        width: 50%;
         height: 95%;
         position: absolute;
         left: 50%;
@@ -141,14 +141,14 @@ export default {
       }
       .btn-prev {
         position: absolute;
-        left: 5%;
+        left: 10%;
         top: 30%;
         z-index: 3;
         font-size: 50px;
       }
       .btn-next {
         position: absolute;
-        right: 5%;
+        right: 10%;
         top: 30%;
         z-index: 3;
         font-size: 50px;
@@ -159,13 +159,13 @@ export default {
         z-index: 2;
       }
       .prev {
-        transform: translate3d(-75%, 0, -100px) scaleY(0.9);
+        transform: translate3d(-80%, 0, -100px) scaleY(0.9);
         transition: 1s;
         opacity: 0.5;
         z-index: 1;
       }
       .next {
-        transform: translate3d(-25%, 0, -100px) scaleY(0.9);
+        transform: translate3d(-20%, 0, -100px) scaleY(0.9);
         transition: 1s;
         opacity: 0.5;
         z-index: 1;
@@ -191,7 +191,7 @@ export default {
 }
 
 // 大屏幕
-@media (min-width: 1600px) {
+@media only screen and (min-width: 1600px) {
   .content-box {
     width: 100%;
     height: 320px;
@@ -203,13 +203,20 @@ export default {
 }
 
 // 平板电脑和小屏电脑之间的分辨率
-@media (min-width: 768px) and (max-width: 979px) {
+@media only screen and (min-width: 768px) and (max-width: 979px) {
   .content-box {
-    height: 220px;
+    height: 210px;
     .content-rotaimg {
       .img-list {
-        .btn-prev,
+        li {
+          width: 60%;
+        }
+        .btn-prev {
+          left: 5%;
+          font-size: 45px;
+        }
         .btn-next {
+          right: 5%;
           font-size: 45px;
         }
       }
@@ -218,7 +225,7 @@ export default {
 }
 
 // 横向放置的手机和竖向放置的平板之间的分辨率
-@media (max-width: 767px) {
+@media only screen and (max-width: 767px) {
   .content-box {
     height: 200px;
     .content-rotaimg {
@@ -226,8 +233,12 @@ export default {
         li {
           width: 70%;
         }
-        .btn-prev,
+        .btn-prev {
+          left: 5%;
+          font-size: 40px;
+        }
         .btn-next {
+          right: 5%;
           font-size: 40px;
         }
       }
@@ -236,7 +247,7 @@ export default {
 }
 
 // 横向放置的手机及分辨率更小的设备
-@media (max-width: 480px) {
+@media only screen and (max-width: 480px) {
   .content-box {
     height: 180px;
     .content-rotaimg {
