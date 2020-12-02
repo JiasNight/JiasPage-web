@@ -1,7 +1,5 @@
 /* 全局样式表 */
-html, body {
-    width: 100%;
-    height: 100%;
+* {
     margin: 0;
     padding: 0;
     /* background: radial-gradient(200% 100% at bottom center, #f7f7b6, #e96f92, #75517d, #1b2947);
@@ -13,6 +11,16 @@ html, body {
     /* overflow:auto; */
 }
 
-body {
+html,body {
+    width: 100%;
+    height: 100%;
     overflow: hidden;
+}
+
+li {
+    list-style: none;
+}
+
+a {
+    text-decoration: none;
 }

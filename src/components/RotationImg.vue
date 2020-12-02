@@ -1,7 +1,7 @@
 <template>
   <div class="content-box">
-    <div class="content-rotaimg">
-      <div class="img-list" @mouseout="imgPlay" @mouseover="imgPause">
+    <div class="box-pic">
+      <ul class="img-list" @mouseout="imgPlay" @mouseover="imgPause">
         <li
           v-for="(imgs, index) in imgsList"
           :key="index"
@@ -17,16 +17,16 @@
         <a class="btn-next" @click="nextBtn()" v-show="showBtn"
           ><Icon type="ios-arrow-forward" color="#aaa"
         /></a>
+      </ul>
+      <!--下面的横线按钮-->
+      <div class="btn-dots">
+        <span
+          v-for="(item, index) in dotsList"
+          :key="index"
+          :style="setActiveDot(index)"
+          @mouseover="currentIndex = index"
+        ></span>
       </div>
-    </div>
-    <!--下面的横线按钮-->
-    <div class="btn-dots">
-      <span
-        v-for="(item, index) in dotsList"
-        :key="index"
-        :style="setActiveDot(index)"
-        @mouseover="currentIndex = index"
-      ></span>
     </div>
   </div>
 </template>
@@ -38,23 +38,23 @@ export default {
       imgsList: [
         {
           src:
-            "https://www.17sucai.com/preview/1232839/2019-08-12/js%E5%8E%9F%E7%94%9F%E5%AE%9E%E7%8E%B0%E8%BD%AE%E6%92%AD%E5%9B%BE%E6%95%88%E6%9E%9C/images/1.jpg",
+            "https://demosc.chinaz.net/Files/DownLoad/webjs1/201806/jiaoben5973/images/1.png",
         },
         {
           src:
-            "https://www.17sucai.com/preview/1232839/2019-08-12/js%E5%8E%9F%E7%94%9F%E5%AE%9E%E7%8E%B0%E8%BD%AE%E6%92%AD%E5%9B%BE%E6%95%88%E6%9E%9C/images/2.jpg",
+            "https://demosc.chinaz.net/Files/DownLoad/webjs1/201806/jiaoben5973/images/2.png",
         },
         {
           src:
-            "https://www.17sucai.com/preview/1232839/2019-08-12/js%E5%8E%9F%E7%94%9F%E5%AE%9E%E7%8E%B0%E8%BD%AE%E6%92%AD%E5%9B%BE%E6%95%88%E6%9E%9C/images/3.jpg",
+            "https://demosc.chinaz.net/Files/DownLoad/webjs1/201806/jiaoben5973/images/3.png",
         },
         {
           src:
-            "https://www.17sucai.com/preview/1232839/2019-08-12/js%E5%8E%9F%E7%94%9F%E5%AE%9E%E7%8E%B0%E8%BD%AE%E6%92%AD%E5%9B%BE%E6%95%88%E6%9E%9C/images/4.jpg",
+            "https://demosc.chinaz.net/Files/DownLoad/webjs1/201806/jiaoben5973/images/4.png",
         },
         {
           src:
-            "https://www.17sucai.com/preview/1232839/2019-08-12/js%E5%8E%9F%E7%94%9F%E5%AE%9E%E7%8E%B0%E8%BD%AE%E6%92%AD%E5%9B%BE%E6%95%88%E6%9E%9C/images/1.jpg",
+            "https://demosc.chinaz.net/Files/DownLoad/webjs1/201806/jiaoben5973/images/5.png",
         },
       ],
       currentIndex: 0,
@@ -116,23 +116,95 @@ export default {
 <style lang="scss" scoped>
 .content-box {
   width: 100%;
-  height: 250px;
+  height: 260px;
   position: relative;
-  top: 60px;
-  .content-rotaimg {
+  top: 10px;
+  .box-pic {
     width: 90%;
     height: 100%;
     position: absolute;
     left: 50%;
     transform: translate(-50%);
-    .img-list {
+    ul li {
+      width: 700px;
+      height: 250px;
+      position: absolute;
+      left: 50%;
+      transform: translate(-50%);
+      a img {
+        width: 100%;
+        height: 100%;
+      }
+    }
+    .btn-prev {
+      position: absolute;
+      left: 10%;
+      top: 30%;
+      z-index: 3;
+      font-size: 50px;
+    }
+    .btn-next {
+      position: absolute;
+      right: 10%;
+      top: 30%;
+      z-index: 3;
+      font-size: 50px;
+    }
+    .active {
+      transform: translate3d(-50%, 0, 0) scaleY(1);
+      transition: 0.5s;
+      z-index: 2;
+    }
+    .prev {
+      transform: translate3d(-80%, 0, -100px) scaleY(0.9);
+      transition: 1s;
+      opacity: 0.5;
+      z-index: 1;
+    }
+    .next {
+      transform: translate3d(-20%, 0, -100px) scaleY(0.9);
+      transition: 1s;
+      opacity: 0.5;
+      z-index: 1;
+    }
+    .btn-dots {
+      width: 80px;
+      height: 8px;
+      position: absolute;
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      grid-column-gap: 10px;
+      left: 50%;
+      bottom: 0px;
+      transform: translate(-50%);
+      span {
+        cursor: pointer;
+        background-color: red;
+        border-radius: 50%;
+      }
+    }
+  }
+}
+
+// 移动端优先原则
+// 横向放置的手机及分辨率更小的设备
+@media (max-width: 480px) {
+  .content-box {
+    width: 100%;
+    height: 190px;
+    position: relative;
+    top: 10px;
+    .box-pic {
+      width: 100%;
       height: 100%;
-      li {
-        width: 50%;
-        height: 95%;
+      position: absolute;
+      left: 50%;
+      transform: translate(-50%);
+      ul li {
+        width: 100%;
+        height: 180px;
         position: absolute;
         left: 50%;
-        list-style: none;
         transform: translate(-50%);
         a img {
           width: 100%;
@@ -154,7 +226,156 @@ export default {
         font-size: 50px;
       }
       .active {
-        transform: translate3d(-50%, 0, 0) scaleX(1) scaleY(1);
+        transform: translate3d(-50%, 0, 0) scaleY(1);
+        transition: 0.5s;
+        z-index: 2;
+      }
+      .prev {
+        transform: translate3d(0, 0, -100px) scaleY(0.9);
+        transition: 1s;
+        opacity: 0.5;
+        z-index: 1;
+      }
+      .next {
+        transform: translate3d(0, 0, -100px) scaleY(0.9);
+        transition: 1s;
+        opacity: 0.5;
+        z-index: 1;
+      }
+      .btn-dots {
+        width: 80px;
+        height: 8px;
+        position: absolute;
+        display: grid;
+        grid-template-columns: repeat(5, 1fr);
+        grid-column-gap: 10px;
+        left: 50%;
+        bottom: 0px;
+        transform: translate(-50%);
+        span {
+          cursor: pointer;
+          background-color: red;
+          border-radius: 50%;
+        }
+      }
+    }
+  }
+}
+
+// 横向放置的手机和竖向放置的平板之间的分辨率
+@media (max-width: 767px) {
+  .content-box {
+    width: 100%;
+    height: 210px;
+    position: relative;
+    top: 10px;
+    .box-pic {
+      width: 90%;
+      height: 100%;
+      position: absolute;
+      left: 50%;
+      transform: translate(-50%);
+      ul li {
+        width: 500px;
+        height: 200px;
+        position: absolute;
+        left: 50%;
+        transform: translate(-50%);
+        a img {
+          width: 100%;
+          height: 100%;
+        }
+      }
+      .btn-prev {
+        position: absolute;
+        left: 2%;
+        top: 30%;
+        z-index: 3;
+        font-size: 50px;
+      }
+      .btn-next {
+        position: absolute;
+        right: 2%;
+        top: 30%;
+        z-index: 3;
+        font-size: 50px;
+      }
+      .active {
+        transform: translate3d(-50%, 0, 0) scaleY(1);
+        transition: 0.5s;
+        z-index: 2;
+      }
+      .prev {
+        transform: translate3d(-70%, 0, -100px) scaleY(0.9);
+        transition: 1s;
+        opacity: 0.5;
+        z-index: 1;
+      }
+      .next {
+        transform: translate3d(-30%, 0, -100px) scaleY(0.9);
+        transition: 1s;
+        opacity: 0.5;
+        z-index: 1;
+      }
+      .btn-dots {
+        width: 80px;
+        height: 8px;
+        position: absolute;
+        display: grid;
+        grid-template-columns: repeat(5, 1fr);
+        grid-column-gap: 10px;
+        left: 50%;
+        bottom: 0px;
+        transform: translate(-50%);
+        span {
+          cursor: pointer;
+          background-color: red;
+          border-radius: 50%;
+        }
+      }
+    }
+  }
+}
+
+@media (min-width: 768px) and (max-width: 979px) {
+  .content-box {
+    width: 100%;
+    height: 220px;
+    position: relative;
+    top: 10px;
+    .box-pic {
+      width: 90%;
+      height: 100%;
+      position: absolute;
+      left: 50%;
+      transform: translate(-50%);
+      ul li {
+        width: 500px;
+        height: 210px;
+        position: absolute;
+        left: 50%;
+        transform: translate(-50%);
+        a img {
+          width: 100%;
+          height: 100%;
+        }
+      }
+      .btn-prev {
+        position: absolute;
+        left: 3%;
+        top: 30%;
+        z-index: 3;
+        font-size: 50px;
+      }
+      .btn-next {
+        position: absolute;
+        right: 3%;
+        top: 30%;
+        z-index: 3;
+        font-size: 50px;
+      }
+      .active {
+        transform: translate3d(-50%, 0, 0) scaleY(1);
         transition: 0.5s;
         z-index: 2;
       }
@@ -170,54 +391,20 @@ export default {
         opacity: 0.5;
         z-index: 1;
       }
-    }
-  }
-  .btn-dots {
-    width: 15%;
-    height: 2.5px;
-    position: absolute;
-    display: grid;
-    grid-template-columns: repeat(5, 1fr);
-    grid-column-gap: 10px;
-    left: 50%;
-    bottom: 0px;
-    transform: translate(-50%);
-    span {
-      cursor: pointer;
-      background-color: red;
-      border-radius: 10%;
-    }
-  }
-}
-
-// 大屏幕
-@media only screen and (min-width: 1600px) {
-  .content-box {
-    width: 100%;
-    height: 320px;
-    .img-list .btn-prev,
-    .btn-next {
-      font-size: 60px;
-    }
-  }
-}
-
-// 平板电脑和小屏电脑之间的分辨率
-@media only screen and (min-width: 768px) and (max-width: 979px) {
-  .content-box {
-    height: 210px;
-    .content-rotaimg {
-      .img-list {
-        li {
-          width: 60%;
-        }
-        .btn-prev {
-          left: 5%;
-          font-size: 45px;
-        }
-        .btn-next {
-          right: 5%;
-          font-size: 45px;
+      .btn-dots {
+        width: 80px;
+        height: 8px;
+        position: absolute;
+        display: grid;
+        grid-template-columns: repeat(5, 1fr);
+        grid-column-gap: 10px;
+        left: 50%;
+        bottom: 0px;
+        transform: translate(-50%);
+        span {
+          cursor: pointer;
+          background-color: red;
+          border-radius: 50%;
         }
       }
     }
@@ -225,49 +412,75 @@ export default {
 }
 
 // 横向放置的手机和竖向放置的平板之间的分辨率
-@media only screen and (max-width: 767px) {
+@media (min-width: 1200px) {
   .content-box {
-    height: 200px;
-    .content-rotaimg {
-      .img-list {
-        li {
-          width: 70%;
-        }
-        .btn-prev {
-          left: 5%;
-          font-size: 40px;
-        }
-        .btn-next {
-          right: 5%;
-          font-size: 40px;
+    width: 100%;
+    height: 260px;
+    position: relative;
+    top: 10px;
+    .box-pic {
+      width: 90%;
+      height: 100%;
+      position: absolute;
+      left: 50%;
+      transform: translate(-50%);
+      ul li {
+        width: 700px;
+        height: 250px;
+        position: absolute;
+        left: 50%;
+        transform: translate(-50%);
+        a img {
+          width: 100%;
+          height: 100%;
         }
       }
-    }
-  }
-}
-
-// 横向放置的手机及分辨率更小的设备
-@media only screen and (max-width: 480px) {
-  .content-box {
-    height: 180px;
-    .content-rotaimg {
-      .img-list {
-        li {
-          width: 90%;
-        }
-        .btn-prev {
-          left: 0px;
-          font-size: 30px;
-        }
-        .btn-next {
-          right: 0px;
-          font-size: 30px;
-        }
+      .btn-prev {
+        position: absolute;
+        left: 10%;
+        top: 30%;
+        z-index: 3;
+        font-size: 50px;
       }
-    }
-    .btn-dots {
-      span {
-        border-radius: 50%;
+      .btn-next {
+        position: absolute;
+        right: 10%;
+        top: 30%;
+        z-index: 3;
+        font-size: 50px;
+      }
+      .active {
+        transform: translate3d(-50%, 0, 0) scaleY(1);
+        transition: 0.5s;
+        z-index: 2;
+      }
+      .prev {
+        transform: translate3d(-80%, 0, -100px) scaleY(0.9);
+        transition: 1s;
+        opacity: 0.5;
+        z-index: 1;
+      }
+      .next {
+        transform: translate3d(-20%, 0, -100px) scaleY(0.9);
+        transition: 1s;
+        opacity: 0.5;
+        z-index: 1;
+      }
+      .btn-dots {
+        width: 80px;
+        height: 8px;
+        position: absolute;
+        display: grid;
+        grid-template-columns: repeat(5, 1fr);
+        grid-column-gap: 10px;
+        left: 50%;
+        bottom: 0px;
+        transform: translate(-50%);
+        span {
+          cursor: pointer;
+          background-color: red;
+          border-radius: 50%;
+        }
       }
     }
   }

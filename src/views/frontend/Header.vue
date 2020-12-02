@@ -30,22 +30,23 @@ export default {
 <style lang="scss" scoped>
 .content-head {
   width: 100%;
-  height: 50px;
-  position: fixed;
-  top: 0;
+  height: 60px;
+  // position: fixed;
+  // top: 0;
   border-bottom: 1px #eee solid;
   background-color: rgba(18, 18, 18, 0.1);
   .head-box {
     width: 70%;
     height: 100%;
-    position: absolute;
-    left: 50%;
-    transform: translate(-50%);
+    margin: 0 auto;
+    // position: absolute;
+    // left: 50%;
+    // transform: translate(-50%);
     display: grid;
     grid-template-columns: repeat(9, 1fr);
     justify-items: center;
     align-items: center;
-    // background-color: aqua;
+    background-color: aqua;
     .head-logo {
       width: 50px;
       height: 50px;
