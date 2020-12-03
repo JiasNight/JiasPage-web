@@ -11,7 +11,7 @@ import ViewUI from 'view-design'
 // 引入iview css样式
 import 'view-design/dist/styles/iview.css'
 // 导入全局样式文件
-import './assets/css/global.css'
+import './assets/css/global.scss'
 
 Vue.config.productionTip = false
 Vue.use(ViewUI)

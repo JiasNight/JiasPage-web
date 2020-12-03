@@ -116,18 +116,18 @@ export default {
 <style lang="scss" scoped>
 .content-box {
   width: 100%;
-  height: 260px;
+  height: 250px;
   position: relative;
   top: 10px;
   .box-pic {
-    width: 90%;
+    width: 1000px;
     height: 100%;
     position: absolute;
     left: 50%;
     transform: translate(-50%);
     ul li {
-      width: 700px;
-      height: 250px;
+      width: 600px;
+      height: 240px;
       position: absolute;
       left: 50%;
       transform: translate(-50%);
@@ -138,14 +138,14 @@ export default {
     }
     .btn-prev {
       position: absolute;
-      left: 10%;
+      left: 20px;
       top: 30%;
       z-index: 3;
       font-size: 50px;
     }
     .btn-next {
       position: absolute;
-      right: 10%;
+      right: 20px;
       top: 30%;
       z-index: 3;
       font-size: 50px;
@@ -190,297 +190,110 @@ export default {
 // 横向放置的手机及分辨率更小的设备
 @media (max-width: 480px) {
   .content-box {
-    width: 100%;
     height: 190px;
-    position: relative;
-    top: 10px;
     .box-pic {
       width: 100%;
-      height: 100%;
-      position: absolute;
-      left: 50%;
-      transform: translate(-50%);
       ul li {
         width: 100%;
         height: 180px;
-        position: absolute;
-        left: 50%;
-        transform: translate(-50%);
-        a img {
-          width: 100%;
-          height: 100%;
-        }
       }
       .btn-prev {
         position: absolute;
-        left: 10%;
-        top: 30%;
-        z-index: 3;
-        font-size: 50px;
+        left: 30px;
+        font-size: 40px;
       }
       .btn-next {
         position: absolute;
-        right: 10%;
-        top: 30%;
-        z-index: 3;
-        font-size: 50px;
-      }
-      .active {
-        transform: translate3d(-50%, 0, 0) scaleY(1);
-        transition: 0.5s;
-        z-index: 2;
-      }
-      .prev {
-        transform: translate3d(0, 0, -100px) scaleY(0.9);
-        transition: 1s;
-        opacity: 0.5;
-        z-index: 1;
-      }
-      .next {
-        transform: translate3d(0, 0, -100px) scaleY(0.9);
-        transition: 1s;
-        opacity: 0.5;
-        z-index: 1;
-      }
-      .btn-dots {
-        width: 80px;
-        height: 8px;
-        position: absolute;
-        display: grid;
-        grid-template-columns: repeat(5, 1fr);
-        grid-column-gap: 10px;
-        left: 50%;
-        bottom: 0px;
-        transform: translate(-50%);
-        span {
-          cursor: pointer;
-          background-color: red;
-          border-radius: 50%;
-        }
+        right: 30px;
+        font-size: 40px;
       }
     }
   }
 }
 
 // 横向放置的手机和竖向放置的平板之间的分辨率
-@media (max-width: 767px) {
+@media (min-width: 481px) and (max-width: 767px) {
   .content-box {
-    width: 100%;
     height: 210px;
-    position: relative;
-    top: 10px;
     .box-pic {
-      width: 90%;
-      height: 100%;
-      position: absolute;
-      left: 50%;
-      transform: translate(-50%);
+      width: 650px;
       ul li {
-        width: 500px;
+        width: 450px;
         height: 200px;
-        position: absolute;
-        left: 50%;
-        transform: translate(-50%);
-        a img {
-          width: 100%;
-          height: 100%;
-        }
       }
       .btn-prev {
         position: absolute;
-        left: 2%;
-        top: 30%;
-        z-index: 3;
-        font-size: 50px;
+        left: 10px;
       }
       .btn-next {
         position: absolute;
-        right: 2%;
-        top: 30%;
-        z-index: 3;
-        font-size: 50px;
-      }
-      .active {
-        transform: translate3d(-50%, 0, 0) scaleY(1);
-        transition: 0.5s;
-        z-index: 2;
-      }
-      .prev {
-        transform: translate3d(-70%, 0, -100px) scaleY(0.9);
-        transition: 1s;
-        opacity: 0.5;
-        z-index: 1;
-      }
-      .next {
-        transform: translate3d(-30%, 0, -100px) scaleY(0.9);
-        transition: 1s;
-        opacity: 0.5;
-        z-index: 1;
-      }
-      .btn-dots {
-        width: 80px;
-        height: 8px;
-        position: absolute;
-        display: grid;
-        grid-template-columns: repeat(5, 1fr);
-        grid-column-gap: 10px;
-        left: 50%;
-        bottom: 0px;
-        transform: translate(-50%);
-        span {
-          cursor: pointer;
-          background-color: red;
-          border-radius: 50%;
-        }
+        right: 10px;
       }
     }
   }
 }
 
+// 平板电脑和小屏电脑之间的分辨率
 @media (min-width: 768px) and (max-width: 979px) {
   .content-box {
-    width: 100%;
     height: 220px;
-    position: relative;
-    top: 10px;
     .box-pic {
-      width: 90%;
-      height: 100%;
-      position: absolute;
-      left: 50%;
-      transform: translate(-50%);
+      width: 850px;
       ul li {
         width: 500px;
         height: 210px;
-        position: absolute;
-        left: 50%;
-        transform: translate(-50%);
-        a img {
-          width: 100%;
-          height: 100%;
-        }
       }
       .btn-prev {
         position: absolute;
-        left: 3%;
-        top: 30%;
-        z-index: 3;
-        font-size: 50px;
+        left: 30px;
       }
       .btn-next {
         position: absolute;
-        right: 3%;
-        top: 30%;
-        z-index: 3;
-        font-size: 50px;
-      }
-      .active {
-        transform: translate3d(-50%, 0, 0) scaleY(1);
-        transition: 0.5s;
-        z-index: 2;
-      }
-      .prev {
-        transform: translate3d(-80%, 0, -100px) scaleY(0.9);
-        transition: 1s;
-        opacity: 0.5;
-        z-index: 1;
-      }
-      .next {
-        transform: translate3d(-20%, 0, -100px) scaleY(0.9);
-        transition: 1s;
-        opacity: 0.5;
-        z-index: 1;
-      }
-      .btn-dots {
-        width: 80px;
-        height: 8px;
-        position: absolute;
-        display: grid;
-        grid-template-columns: repeat(5, 1fr);
-        grid-column-gap: 10px;
-        left: 50%;
-        bottom: 0px;
-        transform: translate(-50%);
-        span {
-          cursor: pointer;
-          background-color: red;
-          border-radius: 50%;
-        }
+        right: 30px;
       }
     }
   }
 }
 
-// 横向放置的手机和竖向放置的平板之间的分辨率
+// 大屏幕
 @media (min-width: 1200px) {
   .content-box {
-    width: 100%;
     height: 260px;
-    position: relative;
-    top: 10px;
     .box-pic {
-      width: 90%;
-      height: 100%;
-      position: absolute;
-      left: 50%;
-      transform: translate(-50%);
+      width: 1200px;
       ul li {
         width: 700px;
         height: 250px;
-        position: absolute;
-        left: 50%;
-        transform: translate(-50%);
-        a img {
-          width: 100%;
-          height: 100%;
-        }
       }
       .btn-prev {
         position: absolute;
-        left: 10%;
-        top: 30%;
-        z-index: 3;
-        font-size: 50px;
+        left: 40px;
       }
       .btn-next {
         position: absolute;
-        right: 10%;
-        top: 30%;
-        z-index: 3;
-        font-size: 50px;
+        right: 40px;
       }
-      .active {
-        transform: translate3d(-50%, 0, 0) scaleY(1);
-        transition: 0.5s;
-        z-index: 2;
+    }
+  }
+}
+
+// 超大屏幕
+@media (min-width: 1600px) {
+  .content-box {
+    height: 290px;
+    .box-pic {
+      width: 1300px;
+      ul li {
+        width: 800px;
+        height: 280px;
       }
-      .prev {
-        transform: translate3d(-80%, 0, -100px) scaleY(0.9);
-        transition: 1s;
-        opacity: 0.5;
-        z-index: 1;
-      }
-      .next {
-        transform: translate3d(-20%, 0, -100px) scaleY(0.9);
-        transition: 1s;
-        opacity: 0.5;
-        z-index: 1;
-      }
-      .btn-dots {
-        width: 80px;
-        height: 8px;
+      .btn-prev {
         position: absolute;
-        display: grid;
-        grid-template-columns: repeat(5, 1fr);
-        grid-column-gap: 10px;
-        left: 50%;
-        bottom: 0px;
-        transform: translate(-50%);
-        span {
-          cursor: pointer;
-          background-color: red;
-          border-radius: 50%;
-        }
+        left: 10px;
+      }
+      .btn-next {
+        position: absolute;
+        right: 10px;
       }
     }
   }
