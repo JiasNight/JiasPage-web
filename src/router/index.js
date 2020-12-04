@@ -2,8 +2,6 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Index from '../views/frontend/Index.vue'
 import Home from '../views/frontend/Home.vue'
-import SignIn from '../views/frontend/SignIn.vue'
-import SignUp from '../views/frontend/SignUp.vue'
 import adminIndex from '../views/backend/index.vue'
 
 Vue.use(VueRouter)
@@ -25,12 +23,12 @@ const routes = [
       {
         path: 'login',
         name: 'SignIn',
-        component: SignIn
+        component: () => import('../views/frontend/SignIn.vue')
       },  
       {
         path: 'signup',
         name: 'SignUp',
-        component: SignUp
+        component: () => import('../views/frontend/SignUp.vue')
       }
     ]
   },
@@ -39,19 +37,35 @@ const routes = [
     path: '/admin',
     name: 'Admin',
     component: adminIndex,
+    // 需要登录才能进入的页面可以增加一个meta属
+    meta: {requireAuth: true},
     children: []
   }
-  // {
-  //   path: '/about',
-  //   name: 'About',
-  //   component: () => import('../views/About.vue')
-  // }
 ]
 
 const router = new VueRouter({
   mode: 'history',
   base: process.env.BASE_URL,
   routes
+})
+
+// 判断是否需要登录权限 以及是否登录
+router.beforeEach((to, from, next) => {
+  // 判断是否需要登录权限
+  if (to.matched.some(res => res.meta.requireAuth)) {
+  // 判断是否登录
+  if (localStorage.getItem('userName')) {
+    next()
+  } else {  
+  // 没登录则跳转到登录界面
+    next({
+      path: '/login',
+      // query: {redirect: to.fullPath}
+    })
+  }
+  } else {
+    next()
+  }
 })
 
 export default router

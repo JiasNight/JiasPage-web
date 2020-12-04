@@ -26,16 +26,16 @@
         </Form>
       </div>
       <div class="head-about">
-        <router-link to="/login"> <span>关于</span></router-link>
+        <router-link to="/login"> <span>分类作品</span></router-link>
       </div>
       <div class="head-about">
-        <router-link to="/login"> <span>关于</span></router-link>
+        <router-link to="/login"> <span>信息动态</span></router-link>
       </div>
       <div class="head-about">
-        <router-link to="/login"> <span>关于</span></router-link>
+        <router-link to="/admin"> <span>个人主页</span></router-link>
       </div>
       <div class="head-about">
-        <router-link to="/login"> <span>关于</span></router-link>
+        <router-link to="/login"> <span>联系作者</span></router-link>
       </div>
     </div>
     <div class="head-menus" ref="menusList">
@@ -47,8 +47,23 @@
           </FormItem>
         </Form>
       </div>
-      <div class="head-sm-about">
-        <router-link to="/login"> <span>关于</span></router-link>
+      <div class="head-sm-public">
+        <router-link to="/login"> <span>新型空间</span></router-link>
+      </div>
+      <div class="head-sm-public">
+        <router-link to="/login"> <span>分类作品</span></span></router-link>
+      </div>
+      <div class="head-sm-public">
+        <router-link to="/public"> <span>信息动态</span></router-link>
+      </div>
+      <div class="head-sm-public">
+        <router-link to="/login"> <span>联系作者</span></router-link>
+      </div>
+      <div class="head-sm-info">
+        <ButtonGroup shape="circle">
+          <Button type="primary" @click="menuSignIn()"> 登录 </Button>
+          <Button type="primary" @click="menuSignUp()"> 注册 </Button>
+        </ButtonGroup>
       </div>
     </div>
   </div>
@@ -77,6 +92,12 @@ export default {
         this.mdmenu = "md-list";
         this.isMenuShow = true;
       }
+    },
+    menuSignIn() {
+      this.$router.push("/login");
+    },
+    menuSignUp() {
+      this.$router.push("/signup");
     },
   },
 };
@@ -164,6 +185,42 @@ export default {
     }
     .head-about span:hover::after {
       display: block;
+    }
+  }
+  .head-menus {
+    width: 100%;
+    height: 500px;
+    position: fixed;
+    bottom: 100%;
+    background: linear-gradient(0deg, rgb(32, 108, 145), rgb(176, 93, 36));
+    z-index: 5;
+    display: none;
+    .head-sm-search {
+      width: 70%;
+      margin: 10px auto 0 auto;
+    }
+    .head-sm-search ::v-deep .ivu-input {
+      border-radius: 20px;
+      opacity: 0.6;
+    }
+    .head-sm-public {
+      width: 70%;
+      height: 30px;
+      background-color: #a0938a;
+      margin: 10px auto;
+      border-radius: 5px;
+      span {
+        position: absolute;
+        left: 50%;
+        transform: translate(-50%, 0);
+        font-size: 18px;
+        color: black;
+        text-align: center;
+        line-height: 30px;
+      }
+    }
+    .head-sm-public:hover {
+      background-color: rgb(223, 173, 108);
     }
   }
 }
@@ -254,24 +311,25 @@ export default {
     }
     .head-menus {
       width: 100%;
-      height: 70%;
+      height: 500px;
       position: fixed;
       bottom: 100%;
       background: linear-gradient(0deg, rgb(32, 108, 145), rgb(176, 93, 36));
       z-index: 5;
+      display: block;
       .head-sm-search {
         width: 70%;
-        margin: 10px auto 0 auto;
+        margin: 20px auto 0 auto;
       }
       .head-sm-search ::v-deep .ivu-input {
         border-radius: 20px;
         opacity: 0.6;
       }
-      .head-sm-about {
+      .head-sm-public {
         width: 70%;
         height: 30px;
         background-color: #a0938a;
-        margin: 0 auto;
+        margin: 50px auto;
         border-radius: 5px;
         span {
           position: absolute;
@@ -282,9 +340,22 @@ export default {
           text-align: center;
           line-height: 30px;
         }
+        span:hover {
+          color: #eee;
+        }
       }
-      .head-sm-about:hover {
+      .head-sm-public:hover {
         background-color: rgb(223, 173, 108);
+      }
+      .head-sm-info {
+        width: 70%;
+        margin: 0 auto;
+      }
+      .head-sm-info ::v-deep .ivu-btn-group {
+        width: 100%;
+      }
+      .head-sm-info ::v-deep .ivu-btn {
+        width: 50%;
       }
     }
   }
@@ -292,6 +363,137 @@ export default {
 
 // 横向放置的手机和竖向放置的平板之间的分辨率
 @media (min-width: 481px) and (max-width: 767px) {
+  .content-head {
+    width: 100%;
+    height: 50px;
+    position: relative;
+    border-bottom: 1px #eee solid;
+    background-color: rgba(18, 18, 18, 0.1);
+    .head-right {
+      position: absolute;
+      right: 10px;
+      top: 50%;
+      transform: translate(0, -50%);
+      cursor: pointer;
+      display: block;
+    }
+    .head-box {
+      width: 200px;
+      height: 100%;
+      margin: 0 auto;
+      .head-logo {
+        width: 50px;
+        height: 50px;
+        img {
+          width: 100%;
+          height: 100%;
+        }
+      }
+      .head-name {
+        span {
+          font-size: 32px;
+          font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", serif;
+          text-align: center;
+          color: #eee;
+        }
+      }
+      .head-search {
+        grid-column-start: 3;
+        grid-column-end: 6;
+        place-self: center;
+        display: none;
+      }
+      .head-search ::v-deep .ivu-form-item {
+        border-radius: 10%;
+        position: relative;
+        top: 15px;
+        left: 50%;
+        transform: translate(-50%, 0);
+      }
+      .head-search ::v-deep .ivu-input {
+        border-radius: 20px;
+        opacity: 0.6;
+      }
+      .head-search ::v-deep .ivu-input:hover {
+        opacity: 0.9;
+      }
+      .head-about {
+        position: relative;
+        display: none;
+      }
+      .head-about span {
+        font-size: 17px;
+        color: #c0baba;
+        transition: 0.3s;
+      }
+      .head-about span:hover {
+        color: azure;
+      }
+      .head-about span::after {
+        width: 5px;
+        height: 5px;
+        display: none;
+        content: "";
+        background: #00abd9;
+        border-radius: 50%;
+        position: absolute;
+        left: 50%;
+        transform: translate(-50%, 0);
+      }
+      .head-about span:hover::after {
+        display: block;
+      }
+    }
+    .head-menus {
+      width: 100%;
+      height: 500px;
+      position: fixed;
+      bottom: 100%;
+      background: linear-gradient(0deg, rgb(32, 108, 145), rgb(176, 93, 36));
+      z-index: 5;
+      display: block;
+      .head-sm-search {
+        width: 70%;
+        margin: 20px auto 0 auto;
+      }
+      .head-sm-search ::v-deep .ivu-input {
+        border-radius: 20px;
+        opacity: 0.6;
+      }
+      .head-sm-public {
+        width: 70%;
+        height: 30px;
+        background-color: #a0938a;
+        margin: 50px auto;
+        border-radius: 5px;
+        span {
+          position: absolute;
+          left: 50%;
+          transform: translate(-50%, 0);
+          font-size: 18px;
+          color: black;
+          text-align: center;
+          line-height: 30px;
+        }
+        span:hover {
+          color: #eee;
+        }
+      }
+      .head-sm-public:hover {
+        background-color: rgb(223, 173, 108);
+      }
+      .head-sm-info {
+        width: 70%;
+        margin: 0 auto;
+      }
+      .head-sm-info ::v-deep .ivu-btn-group {
+        width: 100%;
+      }
+      .head-sm-info ::v-deep .ivu-btn {
+        width: 50%;
+      }
+    }
+  }
 }
 
 // 平板电脑和小屏电脑之间的分辨率
@@ -304,5 +506,10 @@ export default {
 
 // 超大屏幕
 @media (min-width: 1600px) {
+  .content-head {
+    .head-box {
+      width: 1250px;
+    }
+  }
 }
 </style>

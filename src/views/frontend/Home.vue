@@ -1,10 +1,11 @@
 <template>
   <div class="contents">
     <!-- 头部部分 -->
-    <v-header></v-header>
+    <v-Header></v-Header>
     <!-- 轮播图 -->
-    <v-rotation-img></v-rotation-img>
-    <!-- <Divider></Divider> -->
+    <v-RotationImg></v-RotationImg>
+    <!-- 音乐组件 -->
+    <v-AudioPlayer></v-AudioPlayer>
     <div class="content-body"></div>
   </div>
 </template>
@@ -12,13 +13,15 @@
 <script>
 import Header from "@/views/frontend/Header";
 import RotationImg from "@/components/RotationImg";
+import AudioPlayer from "@/components/AudioPlayer";
 export default {
   data() {
     return {};
   },
   components: {
-    "v-header": Header,
-    "v-rotation-img": RotationImg,
+    "v-Header": Header,
+    "v-RotationImg": RotationImg,
+    "v-AudioPlayer": AudioPlayer,
   },
   mounted() {},
   methods: {},
