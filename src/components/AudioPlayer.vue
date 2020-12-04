@@ -1,6 +1,33 @@
 <template>
   <div class="content-audio">
-    <div class="audio-box"></div>
+    <div class="audio-box">
+      <!-- 歌曲图像 -->
+      <div class="audio-img">
+        <img src="../assets/img/moon.png" alt="" />
+      </div>
+      <!-- 歌曲当前时间 -->
+      <span class="audio-time">00:00</span>
+      <!-- 歌曲进度条 -->
+      <Slider class="audio-slider"></Slider>
+      <!-- 歌曲总时间 -->
+      <span class="audio-allTime">04:31</span>
+      <!-- 上一曲按钮 -->
+      <Button class="audio-prev" type="ghost" shape="circle" icon="ios-skip-backward" /></Button>
+      <!-- 暂停按钮 -->
+      <Button class="audio-stop" type="ghost" shape="circle" icon="md-play" /></Button>
+      <!-- 下一曲按钮 -->
+      <Button class="audio-next" type="ghost" shape="circle" icon="ios-skip-forward" /></Button>
+      <!-- 播放列表按钮 -->
+      <Button class="audio-list" type="ghost" shape="circle" icon="md-list" /></Button>
+      <!-- 改变播放模式按钮 -->
+      <Tooltip class="audio-loop"  content="循环" placement="top">
+        <Button type="ghost" shape="circle" icon="md-sync" /></Button>
+      </Tooltip>
+      <!-- 音量按钮 -->
+      <Button class="audio-volume" type="ghost" shape="circle" icon="md-volume-up" /></Button>
+      <!-- 音量滑块 -->
+      <Slider class="audio-volume-slider"></Slider>
+    </div>
     <audio
       @canplay="getDuration"
       @timeupdate="updateTime"
@@ -256,5 +283,73 @@ export default {
   transform: translate(-50%);
   border-radius: 50px;
   z-index: 10;
+  .audio-box {
+    width: calc(100% - 60px);
+    height: 60px;
+    // background-color: cadetblue;
+    position: relative;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    display: grid;
+    grid-template-columns: 80px 60px auto 45px 45px 45px 45px 45px 45px 45px;
+    grid-template-areas: "img getTime slider allTime prev stop next list loop volume";
+    .audio-img,
+    .audio-time,
+    .audio-slider,
+    .audio-allTime,
+    .audio-prev,
+    .audio-stop,
+    .audio-next,
+    .audio-list,
+    .audio-loop,
+    .audio-volume {
+      place-self: center;
+    }
+    .audio-img {
+      width: 50px;
+      height: 50px;
+      grid-area: img;
+      img {
+        width: 100%;
+        height: 100%;
+        border-radius: 50%;
+      }
+    }
+    .audio-time {
+      color: cornsilk;
+      grid-area: getTime;
+    }
+    .audio-slider {
+      width: 100%;
+      grid-area: slider;
+    }
+    .audio-allTime {
+      color: cornsilk;
+      grid-area: allTime;
+    }
+    .audio-prev {
+      grid-area: prev;
+    }
+    .audio-stop {
+      grid-area: stop;
+    }
+    .audio-next {
+      grid-area: next;
+    }
+    .audio-loop {
+      grid-area: loop;
+    }
+    .audio-volume {
+      grid-area: volume;
+    }
+    .audio-volume-slider {
+      grid-area: volume;
+      transform: rotate(-90deg);
+      align-self: center;
+      position: relative;
+      bottom: calc(100% - 20px);
+    }
+  }
 }
 </style>
