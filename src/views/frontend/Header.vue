@@ -35,7 +35,8 @@
         <router-link to="/admin"> <span>个人主页</span></router-link>
       </div>
       <div class="head-about">
-        <router-link to="/login"> <span>联系作者</span></router-link>
+        <router-link to="/login"> <span>登录</span></router-link> |
+        <router-link to="/signup"> <span>注册</span></router-link>
       </div>
     </div>
     <div class="head-menus" ref="menusList">

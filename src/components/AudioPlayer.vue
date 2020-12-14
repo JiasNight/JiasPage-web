@@ -97,9 +97,12 @@ export default {
     },
     // 用于将时间戳转换成所需时间格式
     TimeFormat(timeStamp) {
-      timeStamp = timeStamp | 0; // |0 向下取整
-      let minute = (timeStamp / 60) | 0; // 取余得到分钟
-      let second = timeStamp % 60; // 取余得秒
+      // |0向下取整
+      timeStamp = timeStamp | 0;
+      // 取余得到分钟
+      let minute = (timeStamp / 60) | 0;
+      // 取余得秒
+      let second = timeStamp % 60;
       if (minute < 10) {
         minute = "0" + minute;
       }
