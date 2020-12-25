@@ -83,7 +83,6 @@ export default {
         userName: "",
         userPasswd: "",
         againPasswd: "",
-        identifyCode: "",
       },
       signUpRules: {
         userName: [
@@ -113,11 +112,14 @@ export default {
   methods: {
     // 注册按钮
     signUpBtn(signUpFormData) {
+      console.log(signUpFormData)
       this.$refs.formData.validate((valid) => {
         if (valid) {
-          this.$axios
-            .get("https://api.coindesk.com/v1/bpi/currentprice.json")
-            .then((res) => {
+          this.$axios({
+            url: "https://127.0.0.1:8090/user/addUser",
+            method: "post",
+            params: {userName: signUpFormData.userName, userPasswd: signUpFormData.userPasswd}
+          }).then((res) => {
               console.log(res.data);
               if (res.status === 200) {
                 this.$Message.info("注册成功");
