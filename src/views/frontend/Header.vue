@@ -26,7 +26,7 @@
         </Form>
       </div>
       <div class="head-about">
-        <router-link to="/login"> <span>分类作品</span></router-link>
+        <router-link to="/userlist"> <span>分类作品</span></router-link>
       </div>
       <div class="head-about">
         <router-link to="/login"> <span>信息动态</span></router-link>

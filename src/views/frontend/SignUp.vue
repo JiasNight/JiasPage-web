@@ -116,7 +116,7 @@ export default {
       this.$refs.formData.validate((valid) => {
         if (valid) {
           this.$axios({
-            url: "https://127.0.0.1:8090/user/addUser",
+            url: "http://49.233.217.34:8090/user/addUser",
             method: "post",
             params: {userName: signUpFormData.userName, userPasswd: signUpFormData.userPasswd}
           }).then((res) => {

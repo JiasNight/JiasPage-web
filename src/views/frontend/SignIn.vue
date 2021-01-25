@@ -209,12 +209,12 @@ export default {
             this.clearCookie();
           }
           this.$axios
-            // .get("https://api.coindesk.com/v1/bpi/currentprice.json")
-            .get("https://127.0.0.1:8090/user/allUser")
+            .get("http://49.233.217.34:8090/user/allUser")
             .then((res) => {
               console.log(res.data);
               if (res.status === 200) {
                 this.$Message.info("登录成功");
+  
               } else {
                 this.$Message.info("登录失败");
               }
