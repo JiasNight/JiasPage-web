@@ -116,13 +116,15 @@ export default {
       this.$refs.formData.validate((valid) => {
         if (valid) {
           this.$axios({
-            url: "http://49.233.217.34:8090/user/addUser",
+            // url: "http://49.233.217.34:8090/user/addUser",
+            url: "/user/addUser",
             method: "post",
             params: {userName: signUpFormData.userName, userPasswd: signUpFormData.userPasswd}
           }).then((res) => {
               console.log(res.data);
-              if (res.status === 200) {
+              if (res.data.code === 200) {
                 this.$Message.info("注册成功");
+                this.$router.push('/')
               } else {
                 this.$Message.info("注册失败");
               }

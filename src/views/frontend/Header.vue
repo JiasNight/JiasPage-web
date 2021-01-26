@@ -49,13 +49,13 @@
         </Form>
       </div>
       <div class="head-sm-public">
-        <router-link to="/login"> <span>新型空间</span></router-link>
+        <router-link to="/userlist"> <span>分类作品</span></router-link>
       </div>
       <div class="head-sm-public">
-        <router-link to="/login"> <span>分类作品</span></span></router-link>
+        <router-link to="/login"> <span>信息动态</span></span></router-link>
       </div>
       <div class="head-sm-public">
-        <router-link to="/public"> <span>信息动态</span></router-link>
+        <router-link to="/public"> <span>个人主页</span></router-link>
       </div>
       <div class="head-sm-public">
         <router-link to="/login"> <span>联系作者</span></router-link>

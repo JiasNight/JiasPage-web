@@ -19,8 +19,8 @@ export default {
     // 显示按钮
     showUsersBtn() {
         this.$axios
-        .get("http://49.233.217.34:8090/user/allUser")
-        // .get("http://127.0.0.1:8090/user/allUser")
+        // .get("http://49.233.217.34:8090/user/allUser")
+        .get("http://127.0.0.1:8090/user/allUser")
         .then((res) => {
             console.log(res.data.data);
             if (res.status === 200) {

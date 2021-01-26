@@ -191,7 +191,8 @@ export default {
     makeCode() {
       this.identifyCode = "";
       for (let i = 0; i < 4; i++) {
-        let identifyCodes = "0123456789abcdefjhijklinopqrsduvwxyz";
+        // let identifyCodes = "0123456789abcdefjhijklinopqrsduvwxyz";
+        let identifyCodes = "0123456789";
         this.identifyCode +=
           identifyCodes[
             Math.floor(Math.random() * (identifyCodes.length - 0) + 0)
@@ -208,15 +209,17 @@ export default {
           } else {
             this.clearCookie();
           }
-          this.$axios
-            .get("http://49.233.217.34:8090/user/allUser")
-            .then((res) => {
+          this.$axios({
+            url: "/user/login",
+            method: "post",
+            params: {userName: loginFormData.userName, userPasswd: loginFormData.userPasswd}
+          }).then((res) => {
               console.log(res.data);
-              if (res.status === 200) {
+              if (res.data.code === 200) {
                 this.$Message.info("登录成功");
-  
+                this.$router.push('/')
               } else {
-                this.$Message.info("登录失败");
+                this.$Message.info(res.data.message);
               }
             });
         }
