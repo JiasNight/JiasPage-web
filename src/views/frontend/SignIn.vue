@@ -212,16 +212,19 @@ export default {
           this.$axios({
             url: "/user/login",
             method: "post",
-            params: {userName: loginFormData.userName, userPasswd: loginFormData.userPasswd}
+            params: {
+              userName: loginFormData.userName,
+              userPasswd: loginFormData.userPasswd,
+            },
           }).then((res) => {
-              console.log(res.data);
-              if (res.data.code === 200) {
-                this.$Message.info("登录成功");
-                this.$router.push('/')
-              } else {
-                this.$Message.info(res.data.message);
-              }
-            });
+            console.log(res.data);
+            if (res.data.code === 200) {
+              this.$Message.info("登录成功");
+              this.$router.push("/");
+            } else {
+              this.$Message.info(res.data.message);
+            }
+          });
         }
       });
     },

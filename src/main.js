@@ -15,7 +15,8 @@ import './assets/css/global.scss'
 
 Vue.config.productionTip = false
 Vue.use(ViewUI)
-axios.defaults.baseURL = 'http://49.233.217.34:8090'
+axios.defaults.baseURL = process.env.URL
+// axios.defaults.baseURL = 'http://49.233.217.34:8090'
 // axios.defaults.baseURL = 'http://127.0.0.1:8090'
 Vue.prototype.$axios = axios
 Vue.prototype.qs = qs
