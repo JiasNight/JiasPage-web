@@ -3,7 +3,7 @@
     <div class="audio-box">
       <!-- 歌曲图像 -->
       <div class="audio-img">
-        <img src="../assets/img/moon.png" alt="" />
+        <img src="../assets/logo.png" alt="" />
       </div>
       <!-- 歌曲当前时间 -->
       <span class="audio-time">00:00</span>
@@ -26,7 +26,7 @@
       <!-- 音量按钮 -->
       <Button class="audio-volume" type="ghost" shape="circle" icon="md-volume-up" /></Button>
       <!-- 音量滑块 -->
-      <Slider class="audio-volume-slider"></Slider>
+      <!-- <Slider class="audio-volume-slider"></Slider> -->
     </div>
     <audio
       @canplay="getDuration"
@@ -222,7 +222,7 @@ export default {
       }
     },
     // 显示音量横线
-    ShowVolume() {
+    showVolume() {
       if (this.showVolume) {
         this.showVolume = false;
       } else {
@@ -277,8 +277,8 @@ export default {
 
 <style lang="scss" scoped>
 .content-audio {
-  width: 80%;
-  height: 62px;
+  width: 60%;
+  height: 60px;
   background-color: rgba(41, 42, 45, 0.8);
   position: fixed;
   bottom: 0;
@@ -288,14 +288,14 @@ export default {
   z-index: 10;
   .audio-box {
     width: calc(100% - 60px);
-    height: 60px;
-    // background-color: cadetblue;
+    height: 100%;
     position: relative;
     left: 50%;
     top: 50%;
     transform: translate(-50%, -50%);
     display: grid;
-    grid-template-columns: 80px 60px auto 45px 45px 45px 45px 45px 45px 45px;
+    // grid-template-columns: 60px 60px auto 45px 45px 45px 45px 45px 45px 45px;
+    grid-template-columns: 1.3fr 1.3fr 10fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
     grid-template-areas: "img getTime slider allTime prev stop next list loop volume";
     .audio-img,
     .audio-time,
@@ -313,10 +313,11 @@ export default {
       width: 50px;
       height: 50px;
       grid-area: img;
+      border-radius: 50%;
+      animation: audioImgAction 30s linear infinite;
       img {
         width: 100%;
         height: 100%;
-        border-radius: 50%;
       }
     }
     .audio-time {
@@ -353,6 +354,118 @@ export default {
       position: relative;
       bottom: calc(100% - 20px);
     }
+  }
+}
+
+// 移动端优先原则
+// 横向放置的手机及分辨率更小的设备
+@media (max-width: 480px) {
+  .content-audio {
+    width: 85%;
+    height: 100px;
+    background-color: rgba(41, 42, 45, 0.8);
+    position: fixed;
+    bottom: 0;
+    left: 50%;
+    transform: translate(-50%);
+    border-radius: 50px;
+    z-index: 10;
+    .audio-box {
+      width: calc(100% - 60px);
+      height: 100%;
+      position: relative;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+      grid-template-rows: 1fr 1fr;
+      grid-template-areas:
+        "img getTime slider slider slider slider slider slider slider allTime"
+        ". . prev stop next list loop volume . .";
+      .audio-img,
+      .audio-time,
+      .audio-slider,
+      .audio-allTime,
+      .audio-prev,
+      .audio-stop,
+      .audio-next,
+      .audio-list,
+      .audio-loop,
+      .audio-volume {
+        place-self: center;
+      }
+      .audio-img {
+        width: 50px;
+        height: 50px;
+        grid-area: img;
+        border-radius: 50%;
+        animation: audioImgAction 30s linear infinite;
+        img {
+          width: 100%;
+          height: 100%;
+        }
+      }
+      .audio-time {
+        color: cornsilk;
+        grid-area: getTime;
+      }
+      .audio-slider {
+        width: 100%;
+        grid-area: slider;
+      }
+      .audio-allTime {
+        color: cornsilk;
+        grid-area: allTime;
+      }
+      .audio-prev {
+        grid-area: prev;
+      }
+      .audio-stop {
+        grid-area: stop;
+      }
+      .audio-next {
+        grid-area: next;
+      }
+      .audio-loop {
+        grid-area: loop;
+      }
+      .audio-volume {
+        grid-area: volume;
+      }
+      .audio-volume-slider {
+        grid-area: volume;
+        transform: rotate(-90deg);
+        align-self: center;
+        position: relative;
+        bottom: calc(100% - 20px);
+      }
+    }
+  }
+}
+
+// 横向放置的手机和竖向放置的平板之间的分辨率
+@media (min-width: 481px) and (max-width: 767px) {
+}
+
+// 平板电脑和小屏电脑之间的分辨率
+@media (min-width: 768px) and (max-width: 979px) {
+}
+
+// 大屏幕
+@media (min-width: 1200px) {
+}
+
+// 超大屏幕
+@media (min-width: 1600px) {
+}
+
+@keyframes audioImgAction {
+  0% {
+    transform: rotate(-360deg);
+  }
+  100% {
+    transform: rotate(360deg);
   }
 }
 </style>

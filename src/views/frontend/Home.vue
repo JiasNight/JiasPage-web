@@ -2,11 +2,14 @@
   <div class="contents">
     <!-- 头部部分 -->
     <v-Header></v-Header>
-    <!-- 轮播图 -->
-    <v-RotationImg></v-RotationImg>
-    <!-- 音乐组件 -->
-    <v-AudioPlayer></v-AudioPlayer>
-    <div class="content-body"></div>
+    <!-- 身体部分 -->
+    <div class="content-body">
+      <!-- 轮播图 -->
+      <v-RotationImg></v-RotationImg>
+      <Divider> 内容部分 </Divider>
+      <!-- 音乐组件 -->
+      <v-AudioPlayer></v-AudioPlayer>
+    </div>
   </div>
 </template>
 
@@ -36,15 +39,12 @@ export default {
   top: 0;
   left: 0;
   .content-body {
-    .body-img {
-      height: 350px;
-      .img-loop {
-        height: 350px;
-        img {
-          width: 100%;
-        }
-      }
-    }
+    overflow: hidden;
+  }
+  .content-body ::v-deep .ivu-divider-horizontal {
+    width: 60%;
+    min-width: 60%;
+    margin: 20px auto;
   }
 }
 </style>

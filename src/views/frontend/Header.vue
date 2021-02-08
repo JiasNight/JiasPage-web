@@ -230,123 +230,28 @@ export default {
 // 横向放置的手机及分辨率更小的设备
 @media (max-width: 480px) {
   .content-head {
-    width: 100%;
     height: 50px;
     position: relative;
-    border-bottom: 1px #eee solid;
     background-color: rgba(18, 18, 18, 0.1);
     .head-right {
-      position: absolute;
-      right: 10px;
-      top: 50%;
-      transform: translate(0, -50%);
-      cursor: pointer;
       display: block;
     }
     .head-box {
       width: 200px;
-      height: 100%;
-      margin: 0 auto;
-      .head-logo {
-        width: 50px;
-        height: 50px;
-        img {
-          width: 100%;
-          height: 100%;
-        }
-      }
-      .head-name {
-        span {
-          font-size: 32px;
-          font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", serif;
-          text-align: center;
-          color: #eee;
-        }
-      }
       .head-search {
-        grid-column-start: 3;
-        grid-column-end: 6;
-        place-self: center;
         display: none;
-      }
-      .head-search ::v-deep .ivu-form-item {
-        border-radius: 10%;
-        position: relative;
-        top: 15px;
-        left: 50%;
-        transform: translate(-50%, 0);
-      }
-      .head-search ::v-deep .ivu-input {
-        border-radius: 20px;
-        opacity: 0.6;
-      }
-      .head-search ::v-deep .ivu-input:hover {
-        opacity: 0.9;
       }
       .head-about {
-        position: relative;
         display: none;
-      }
-      .head-about span {
-        font-size: 17px;
-        color: #c0baba;
-        transition: 0.3s;
-      }
-      .head-about span:hover {
-        color: azure;
-      }
-      .head-about span::after {
-        width: 5px;
-        height: 5px;
-        display: none;
-        content: "";
-        background: #00abd9;
-        border-radius: 50%;
-        position: absolute;
-        left: 50%;
-        transform: translate(-50%, 0);
-      }
-      .head-about span:hover::after {
-        display: block;
       }
     }
     .head-menus {
-      width: 100%;
-      height: 500px;
-      position: fixed;
-      bottom: 100%;
-      background: linear-gradient(0deg, rgb(32, 108, 145), rgb(176, 93, 36));
-      z-index: 5;
       display: block;
-      .head-sm-search {
-        width: 70%;
-        margin: 20px auto 0 auto;
-      }
-      .head-sm-search ::v-deep .ivu-input {
-        border-radius: 20px;
-        opacity: 0.6;
-      }
       .head-sm-public {
-        width: 70%;
-        height: 30px;
-        background-color: #a0938a;
         margin: 50px auto;
-        border-radius: 5px;
-        span {
-          position: absolute;
-          left: 50%;
-          transform: translate(-50%, 0);
-          font-size: 18px;
-          color: black;
-          text-align: center;
-          line-height: 30px;
-        }
         span:hover {
           color: #eee;
         }
-      }
-      .head-sm-public:hover {
-        background-color: rgb(223, 173, 108);
       }
       .head-sm-info {
         width: 70%;
@@ -365,123 +270,31 @@ export default {
 // 横向放置的手机和竖向放置的平板之间的分辨率
 @media (min-width: 481px) and (max-width: 767px) {
   .content-head {
-    width: 100%;
     height: 50px;
     position: relative;
-    border-bottom: 1px #eee solid;
     background-color: rgba(18, 18, 18, 0.1);
     .head-right {
-      position: absolute;
-      right: 10px;
-      top: 50%;
-      transform: translate(0, -50%);
-      cursor: pointer;
       display: block;
     }
     .head-box {
       width: 200px;
-      height: 100%;
-      margin: 0 auto;
-      .head-logo {
-        width: 50px;
-        height: 50px;
-        img {
-          width: 100%;
-          height: 100%;
-        }
-      }
-      .head-name {
-        span {
-          font-size: 32px;
-          font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", serif;
-          text-align: center;
-          color: #eee;
-        }
-      }
       .head-search {
-        grid-column-start: 3;
-        grid-column-end: 6;
-        place-self: center;
         display: none;
-      }
-      .head-search ::v-deep .ivu-form-item {
-        border-radius: 10%;
-        position: relative;
-        top: 15px;
-        left: 50%;
-        transform: translate(-50%, 0);
-      }
-      .head-search ::v-deep .ivu-input {
-        border-radius: 20px;
-        opacity: 0.6;
-      }
-      .head-search ::v-deep .ivu-input:hover {
-        opacity: 0.9;
       }
       .head-about {
-        position: relative;
         display: none;
-      }
-      .head-about span {
-        font-size: 17px;
-        color: #c0baba;
-        transition: 0.3s;
-      }
-      .head-about span:hover {
-        color: azure;
-      }
-      .head-about span::after {
-        width: 5px;
-        height: 5px;
-        display: none;
-        content: "";
-        background: #00abd9;
-        border-radius: 50%;
-        position: absolute;
-        left: 50%;
-        transform: translate(-50%, 0);
-      }
-      .head-about span:hover::after {
-        display: block;
       }
     }
     .head-menus {
-      width: 100%;
-      height: 500px;
-      position: fixed;
-      bottom: 100%;
-      background: linear-gradient(0deg, rgb(32, 108, 145), rgb(176, 93, 36));
-      z-index: 5;
       display: block;
       .head-sm-search {
-        width: 70%;
         margin: 20px auto 0 auto;
       }
-      .head-sm-search ::v-deep .ivu-input {
-        border-radius: 20px;
-        opacity: 0.6;
-      }
       .head-sm-public {
-        width: 70%;
-        height: 30px;
-        background-color: #a0938a;
         margin: 50px auto;
-        border-radius: 5px;
-        span {
-          position: absolute;
-          left: 50%;
-          transform: translate(-50%, 0);
-          font-size: 18px;
-          color: black;
-          text-align: center;
-          line-height: 30px;
-        }
         span:hover {
           color: #eee;
         }
-      }
-      .head-sm-public:hover {
-        background-color: rgb(223, 173, 108);
       }
       .head-sm-info {
         width: 70%;
@@ -499,6 +312,45 @@ export default {
 
 // 平板电脑和小屏电脑之间的分辨率
 @media (min-width: 768px) and (max-width: 979px) {
+  .content-head {
+    height: 50px;
+    position: relative;
+    background-color: rgba(18, 18, 18, 0.1);
+    .head-right {
+      display: block;
+    }
+    .head-box {
+      width: 200px;
+      .head-search {
+        display: none;
+      }
+      .head-about {
+        display: none;
+      }
+    }
+    .head-menus {
+      display: block;
+      .head-sm-search {
+        margin: 20px auto 0 auto;
+      }
+      .head-sm-public {
+        margin: 50px auto;
+        span:hover {
+          color: #eee;
+        }
+      }
+      .head-sm-info {
+        width: 70%;
+        margin: 0 auto;
+      }
+      .head-sm-info ::v-deep .ivu-btn-group {
+        width: 100%;
+      }
+      .head-sm-info ::v-deep .ivu-btn {
+        width: 50%;
+      }
+    }
+  }
 }
 
 // 大屏幕

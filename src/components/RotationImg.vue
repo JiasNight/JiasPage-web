@@ -191,6 +191,7 @@ export default {
 @media (max-width: 480px) {
   .content-box {
     height: 190px;
+    top: 5px;
     .box-pic {
       width: 100%;
       ul li {
