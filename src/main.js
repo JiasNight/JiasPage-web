@@ -15,7 +15,7 @@ import './assets/css/global.scss'
 
 Vue.config.productionTip = false
 Vue.use(ViewUI)
-axios.defaults.baseURL = process.env.NODE_ENV
+axios.defaults.baseURL = process.env.VUE_APP_BASE_URL
 Vue.prototype.$axios = axios
 Vue.prototype.qs = qs
 
