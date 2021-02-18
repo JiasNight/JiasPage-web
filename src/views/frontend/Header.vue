@@ -39,6 +39,9 @@
         <router-link to="/signup"> <span>注册</span></router-link>
       </div>
     </div>
+    <!-- 遮罩层 -->
+    <div :class="maskStyle" @click="closeByMask()"></div>
+    <!-- 弹出抽屉 -->
     <div class="head-menus" ref="menusList">
       <!-- 搜索框 -->
       <div class="head-sm-search">
@@ -77,17 +80,25 @@ export default {
       menus: 10,
       isMenuShow: false,
       mdmenu: "md-menu",
+      maskShow: false,
     };
+  },
+  computed: {
+    maskStyle() {
+      return { "mask-style": this.maskShow };
+    },
   },
   methods: {
     // 显示菜单
     showMenus() {
       this.$refs.menusList.style.transition = "0.5s";
       if (this.isMenuShow) {
+        this.maskShow = false;
         this.$refs.menusList.style.transform = "translate(0)";
         this.mdmenu = "md-menu";
         this.isMenuShow = false;
       } else {
+        this.maskShow = true;
         this.$refs.menusList.style.transform =
           "translate(0, calc(100% + 50px))";
         this.mdmenu = "md-list";
@@ -99,6 +110,9 @@ export default {
     },
     menuSignUp() {
       this.$router.push("/signup");
+    },
+    closeByMask() {
+      this.showMenus();
     },
   },
 };
@@ -245,6 +259,14 @@ export default {
         display: none;
       }
     }
+    .mask-style {
+      position: fixed;
+      top: 60px;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.5);
+      transition: opacity 0.5s;
+    }
     .head-menus {
       display: block;
       .head-sm-public {
@@ -284,6 +306,14 @@ export default {
       .head-about {
         display: none;
       }
+    }
+    .mask-style {
+      position: fixed;
+      top: 60px;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.5);
+      transition: opacity 0.5s;
     }
     .head-menus {
       display: block;
@@ -327,6 +357,14 @@ export default {
       .head-about {
         display: none;
       }
+    }
+    .mask-style {
+      position: fixed;
+      top: 60px;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.5);
+      transition: opacity 0.5s;
     }
     .head-menus {
       display: block;
