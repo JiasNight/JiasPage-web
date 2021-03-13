@@ -219,6 +219,8 @@ export default {
           }).then((res) => {
             console.log(res.data);
             if (res.data.code === 200) {
+              localStorage.setItem('userName', loginFormData.userName);
+              this.$store.commit('saveUserName', loginFormData.userName);
               this.$Message.info("登录成功");
               this.$router.push("/");
             } else {

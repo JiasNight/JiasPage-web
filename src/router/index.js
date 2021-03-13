@@ -33,6 +33,7 @@ const routes = [
       {
         path: 'userlist',
         name: 'UserList',
+        meta: {requireAuth: true},
         component: () => import('../views/frontend/UserList.vue')
       }
     ]
@@ -58,16 +59,16 @@ const router = new VueRouter({
 router.beforeEach((to, from, next) => {
   // 判断是否需要登录权限
   if (to.matched.some(res => res.meta.requireAuth)) {
-  // 判断是否登录
-  if (localStorage.getItem('userName')) {
-    next()
-  } else {  
-  // 没登录则跳转到登录界面
-    next({
-      path: '/login',
-      // query: {redirect: to.fullPath}
-    })
-  }
+    // 判断是否登录
+    if (localStorage.getItem('userName')) {
+      next()
+    } else {  
+    // 没登录则跳转到登录界面
+      next({
+        path: '/login',
+        // query: {redirect: to.fullPath}
+      })
+    }
   } else {
     next()
   }

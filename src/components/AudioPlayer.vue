@@ -12,19 +12,19 @@
       <!-- 歌曲总时间 -->
       <span class="audio-allTime">04:31</span>
       <!-- 上一曲按钮 -->
-      <Button class="audio-prev" type="ghost" shape="circle" icon="ios-skip-backward" /></Button>
+      <Button class="audio-prev" type="text" shape="circle" icon="ios-skip-backward" /></Button>
       <!-- 暂停按钮 -->
-      <Button class="audio-stop" type="ghost" shape="circle" icon="md-play" /></Button>
+      <Button class="audio-stop" type="text" shape="circle" icon="md-play" /></Button>
       <!-- 下一曲按钮 -->
-      <Button class="audio-next" type="ghost" shape="circle" icon="ios-skip-forward" /></Button>
+      <Button class="audio-next" type="text" shape="circle" icon="ios-skip-forward" /></Button>
       <!-- 播放列表按钮 -->
-      <Button class="audio-list" type="ghost" shape="circle" icon="md-list" /></Button>
+      <Button class="audio-list" type="text" shape="circle" icon="md-list" /></Button>
       <!-- 改变播放模式按钮 -->
       <Tooltip class="audio-loop"  content="循环" placement="top">
-        <Button type="ghost" shape="circle" icon="md-sync" /></Button>
+        <Button type="text" shape="circle" icon="md-sync" /></Button>
       </Tooltip>
       <!-- 音量按钮 -->
-      <Button class="audio-volume" type="ghost" shape="circle" icon="md-volume-up" /></Button>
+      <Button class="audio-volume" type="text" shape="circle" icon="md-volume-up" /></Button>
       <!-- 音量滑块 -->
       <!-- <Slider class="audio-volume-slider"></Slider> -->
     </div>

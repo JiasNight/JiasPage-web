@@ -34,9 +34,12 @@
       <div class="head-about">
         <router-link to="/admin"> <span>个人主页</span></router-link>
       </div>
-      <div class="head-about">
+      <div class="head-about" v-if="$store.getters.userName === null">
         <router-link to="/login"> <span>登录</span></router-link> |
         <router-link to="/signup"> <span>注册</span></router-link>
+      </div>
+      <div class="head-about" v-else>
+        <Avatar>{{$store.getters.userName}}</Avatar>
       </div>
     </div>
     <!-- 遮罩层 -->
@@ -63,11 +66,14 @@
       <div class="head-sm-public">
         <router-link to="/login"> <span>联系作者</span></router-link>
       </div>
-      <div class="head-sm-info">
+      <div class="head-sm-info" v-if="$store.getters.userName === null">
         <ButtonGroup shape="circle">
           <Button type="primary" @click="menuSignIn()"> 登录 </Button>
           <Button type="primary" @click="menuSignUp()"> 注册 </Button>
         </ButtonGroup>
+      </div>
+      <div class="head-sm-info" v-else>
+        <Avatar>{{$store.getters.userName}}</Avatar>
       </div>
     </div>
   </div>
