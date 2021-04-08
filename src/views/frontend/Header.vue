@@ -85,43 +85,43 @@ export default {
     return {
       menus: 10,
       isMenuShow: false,
-      mdmenu: "md-menu",
+      mdmenu: 'md-menu',
       maskShow: false,
-    };
+    }
   },
   computed: {
     maskStyle() {
-      return { "mask-style": this.maskShow };
+      return { 'mask-style': this.maskShow }
     },
   },
   methods: {
     // 显示菜单
     showMenus() {
-      this.$refs.menusList.style.transition = "0.5s";
+      this.$refs.menusList.style.transition = '0.5s'
       if (this.isMenuShow) {
-        this.maskShow = false;
-        this.$refs.menusList.style.transform = "translate(0)";
-        this.mdmenu = "md-menu";
-        this.isMenuShow = false;
+        this.maskShow = false
+        this.$refs.menusList.style.transform = 'translate(0)'
+        this.mdmenu = 'md-menu'
+        this.isMenuShow = false
       } else {
-        this.maskShow = true;
+        this.maskShow = true
         this.$refs.menusList.style.transform =
-          "translate(0, calc(100% + 50px))";
-        this.mdmenu = "md-list";
-        this.isMenuShow = true;
+          'translate(0, calc(100% + 50px))'
+        this.mdmenu = 'md-list'
+        this.isMenuShow = true
       }
     },
     menuSignIn() {
-      this.$router.push("/login");
+      this.$router.push('/login')
     },
     menuSignUp() {
-      this.$router.push("/signup");
+      this.$router.push('/signup')
     },
     closeByMask() {
-      this.showMenus();
+      this.showMenus()
     },
   },
-};
+}
 </script>
 
 <style lang="scss" scoped>

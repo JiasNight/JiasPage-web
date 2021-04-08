@@ -14,21 +14,21 @@
 </template>
 
 <script>
-import Header from "@/views/frontend/Header";
-import RotationImg from "@/components/RotationImg";
-import AudioPlayer from "@/components/AudioPlayer";
+import Header from '@/views/frontend/Header'
+import RotationImg from '@/components/RotationImg'
+import AudioPlayer from '@/components/AudioPlayer'
 export default {
   data() {
-    return {};
+    return {}
   },
   components: {
-    "v-Header": Header,
-    "v-RotationImg": RotationImg,
-    "v-AudioPlayer": AudioPlayer,
+    'v-Header': Header,
+    'v-RotationImg': RotationImg,
+    'v-AudioPlayer': AudioPlayer,
   },
   mounted() {},
   methods: {},
-};
+}
 </script>
 
 <style lang="scss" scoped>

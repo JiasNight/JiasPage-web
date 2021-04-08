@@ -70,74 +70,74 @@
 export default {
   data() {
     const passwdAgainCheck = (rule, value, callback) => {
-      if (value === "") {
-        callback(new Error("请输入密码确认!"));
+      if (value === '') {
+        callback(new Error('请输入密码确认!'))
       } else if (value !== this.signUpFormData.userPasswd) {
-        callback(new Error("密码确认错误!"));
+        callback(new Error('密码确认错误!'))
       } else {
-        callback();
+        callback()
       }
-    };
+    }
     return {
       signUpFormData: {
-        userName: "",
-        userPasswd: "",
-        againPasswd: "",
+        userName: '',
+        userPasswd: '',
+        againPasswd: '',
       },
       signUpRules: {
         userName: [
-          { required: true, message: "请输入用户名！", trigger: "blur" },
+          { required: true, message: '请输入用户名！', trigger: 'blur' },
         ],
         userPasswd: [
-          { required: true, message: "请输入用户密码！", trigger: "blur" },
+          { required: true, message: '请输入用户密码！', trigger: 'blur' },
           {
-            type: "string",
+            type: 'string',
             min: 6,
-            message: "用户密码最短为6",
-            trigger: "blur",
+            message: '用户密码最短为6',
+            trigger: 'blur',
           },
         ],
         againPasswd: [
           {
             required: true,
             validator: passwdAgainCheck,
-            trigger: "blur",
+            trigger: 'blur',
           },
         ],
       },
-    };
+    }
   },
   components: {},
   mounted() {},
   methods: {
     // 注册按钮
     signUpBtn(signUpFormData) {
-      console.log(signUpFormData);
+      console.log(signUpFormData)
       this.$refs.formData.validate((valid) => {
         if (valid) {
           this.$axios({
-            url: "/user/addUser",
-            method: "post",
+            url: '/user/addUser',
+            method: 'post',
             params: {
               userName: signUpFormData.userName,
               userPasswd: signUpFormData.userPasswd,
             },
           }).then((res) => {
-            console.log(res.data);
+            console.log(res.data)
             if (res.data.code === 200) {
-              this.$Message.info("注册成功");
-              this.$router.push("/");
+              this.$Message.info('注册成功')
+              this.$router.push('/')
             } else {
-              this.$Message.info("注册失败");
+              this.$Message.info('注册失败')
             }
-          });
+          })
         } else {
-          console.log(signUpFormData);
+          console.log(signUpFormData)
         }
-      });
+      })
     },
   },
-};
+}
 </script>
 
 <style lang="scss" scoped>

@@ -16,45 +16,45 @@
 </template>
 
 <script>
-import BackgroundImg from "../../../public/back.jpg";
+import BackgroundImg from '../../../public/back.jpg'
 export default {
   data() {
     return {
       starsCount: 800, // 星星数量
       distance: 800, // 间距
       backgroundImgUrl: BackgroundImg,
-    };
+    }
   },
   components: {},
   mounted() {
-    this.starsBackgroundFun();
-    this.setBackImg();
+    this.starsBackgroundFun()
+    this.setBackImg()
   },
   methods: {
     setBackImg() {
-      let backImg = this.$refs.backImg.style;
-      backImg.backgroundImage = "url(" + this.backgroundImgUrl + ")";
-      backImg.backgroundSize = "cover";
-      backImg.backgroundRepeat = "no-repeat";
-      backImg.backgroundAttachment = "fixed";
+      let backImg = this.$refs.backImg.style
+      backImg.backgroundImage = 'url(' + this.backgroundImgUrl + ')'
+      backImg.backgroundSize = 'cover'
+      backImg.backgroundRepeat = 'no-repeat'
+      backImg.backgroundAttachment = 'fixed'
     },
     // HTML星星背景方法
     starsBackgroundFun() {
-      let _this = this;
-      let starArr = this.$refs.star;
+      let _this = this
+      let starArr = this.$refs.star
       // 遍历添加样式
       starArr.forEach((item) => {
-        var sf = 0.2 + Math.random() * 1;
-        var thisDistance = _this.distance + Math.random() * 300;
-        item.style.transformOrigin = `0 0 ${thisDistance}px`;
+        var sf = 0.2 + Math.random() * 1
+        var thisDistance = _this.distance + Math.random() * 300
+        item.style.transformOrigin = `0 0 ${thisDistance}px`
         item.style.transform = `translate3d(0,0,-${thisDistance}px) rotateY(${
           Math.random() * 360
-        }deg) rotateX(${Math.random() * -50}deg) scale(${sf},${sf})`;
-        item.style.borderRadius = "50%";
-      });
+        }deg) rotateX(${Math.random() * -50}deg) scale(${sf},${sf})`
+        item.style.borderRadius = '50%'
+      })
     },
   },
-};
+}
 </script>
 
 <style lang="scss" scoped>

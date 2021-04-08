@@ -104,99 +104,99 @@
 </template>
 
 <script>
-import IdentifyCode from "@/components/IdentifyCode";
+import IdentifyCode from '@/components/IdentifyCode'
 export default {
   data() {
     const identifyCodeCheck = (rule, value, callback) => {
-      if (value === "") {
-        callback(new Error("请输入验证码!"));
+      if (value === '') {
+        callback(new Error('请输入验证码!'))
       } else if (value !== this.identifyCode) {
-        callback(new Error("验证码输入错误!"));
+        callback(new Error('验证码输入错误!'))
       } else {
-        callback();
+        callback()
       }
-    };
+    }
     return {
       isRemember: false, // 是否记住密码
-      identifyCode: "",
+      identifyCode: '',
       loginFormData: {
-        userName: "",
-        userPasswd: "",
-        identifyCode: "",
+        userName: '',
+        userPasswd: '',
+        identifyCode: '',
       },
       loginRules: {
         userName: [
-          { required: true, message: "请输入登录用户名！", trigger: "blur" },
+          { required: true, message: '请输入登录用户名！', trigger: 'blur' },
         ],
         userPasswd: [
-          { required: true, message: "请输入用户密码！", trigger: "blur" },
+          { required: true, message: '请输入用户密码！', trigger: 'blur' },
           {
-            type: "string",
+            type: 'string',
             min: 6,
-            message: "用户密码最短为6",
-            trigger: "blur",
+            message: '用户密码最短为6',
+            trigger: 'blur',
           },
         ],
         identifyCode: [
           {
             required: true,
             validator: identifyCodeCheck,
-            trigger: "blur",
+            trigger: 'blur',
           },
         ],
       },
-    };
+    }
   },
   components: {
-    "v-identifyCode": IdentifyCode,
+    'v-identifyCode': IdentifyCode,
   },
   mounted() {
     // 读取cookie里的用户名和密码
-    this.getCookie();
+    this.getCookie()
     // 验证码生成
-    this.makeCode();
+    this.makeCode()
   },
   methods: {
     // 设置cookie
     setCookie(name, pwd, exdays) {
-      var exdate = new Date();
-      exdate.setTime(exdate.getTime() + 24 * 60 * 60 * 1000 * exdays); //保存的天数
+      var exdate = new Date()
+      exdate.setTime(exdate.getTime() + 24 * 60 * 60 * 1000 * exdays) //保存的天数
       document.cookie =
-        "userName=" + name + ";path=/;expires=" + exdate.toLocaleString();
+        'userName=' + name + ';path=/;expires=' + exdate.toLocaleString()
       document.cookie =
-        "userPasswd=" + pwd + ";path=/;expires=" + exdate.toLocaleString();
+        'userPasswd=' + pwd + ';path=/;expires=' + exdate.toLocaleString()
     },
     // 获取cookie
     getCookie() {
       if (document.cookie.length > 0) {
-        var arr = document.cookie.split("; ");
+        var arr = document.cookie.split('; ')
         // console.log(arr);
         for (var i = 0; i < arr.length; i++) {
-          var arr2 = arr[i].split("="); // 再次切割
+          var arr2 = arr[i].split('=') // 再次切割
           // 判断查找相对应的值
-          if (arr2[0] == "userName") {
+          if (arr2[0] == 'userName') {
             // 保存到保存数据的地方
-            this.loginFormData.userName = arr2[1];
-          } else if (arr2[0] == "userPasswd") {
-            this.loginFormData.userPasswd = arr2[1];
+            this.loginFormData.userName = arr2[1]
+          } else if (arr2[0] == 'userPasswd') {
+            this.loginFormData.userPasswd = arr2[1]
           }
         }
       }
     },
     // 删除cookie
     clearCookie() {
-      this.setCookie("", "", -1); // 修改2值都为空，天数为负1天就好了
+      this.setCookie('', '', -1) // 修改2值都为空，天数为负1天就好了
     },
     //生成验证码
     makeCode() {
-      this.identifyCode = "";
+      this.identifyCode = ''
       for (let i = 0; i < 4; i++) {
         // let identifyCodes = "0123456789abcdefjhijklinopqrsduvwxyz";
-        let identifyCodes = "0123456789";
+        let identifyCodes = '0123456789'
         this.identifyCode +=
           identifyCodes[
             Math.floor(Math.random() * (identifyCodes.length - 0) + 0)
-          ];
+          ]
       }
       // console.log(this.identifyCode);
     },
@@ -205,33 +205,33 @@ export default {
       this.$refs.formData.validate((valid) => {
         if (valid) {
           if (this.isRemember) {
-            this.setCookie(loginFormData.userName, loginFormData.userPasswd, 7);
+            this.setCookie(loginFormData.userName, loginFormData.userPasswd, 7)
           } else {
-            this.clearCookie();
+            this.clearCookie()
           }
           this.$axios({
-            url: "/user/login",
-            method: "post",
+            url: '/user/login',
+            method: 'post',
             params: {
               userName: loginFormData.userName,
               userPasswd: loginFormData.userPasswd,
             },
           }).then((res) => {
-            console.log(res.data);
+            console.log(res.data)
             if (res.data.code === 200) {
-              localStorage.setItem('userName', loginFormData.userName);
-              this.$store.commit('saveUserName', loginFormData.userName);
-              this.$Message.info("登录成功");
-              this.$router.push("/");
+              localStorage.setItem('userName', loginFormData.userName)
+              this.$store.commit('saveUserName', loginFormData.userName)
+              this.$Message.info('登录成功')
+              this.$router.push('/')
             } else {
-              this.$Message.info(res.data.message);
+              this.$Message.info(res.data.message)
             }
-          });
+          })
         }
-      });
+      })
     },
   },
-};
+}
 </script>
 
 <style lang="scss" scoped>
