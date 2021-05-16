@@ -1,19 +1,22 @@
 <template>
-  <div class="signUp-box">
+  <div class="signup-box">
     <!-- 标题 -->
-    <div class="signUp-head">
+    <div class="signup-head">
       <router-link to="/">
-        <span class="signUp-title">J I A S</span>
+        <div class="signup-picture">
+          <img :src="signinPicture">
+        </div>
       </router-link>
+      <span class="signup-title">J I A S</span>
       <router-link to="/login">
-        <span class="go-login">直接登录？</span>
+        <span class="go-signin">直接登录？</span>
       </router-link>
     </div>
-    <div class="signUp-form">
+    <div class="signup-form">
       <!-- 注册表单 -->
       <Form
         ref="formData"
-        class="signUp-style"
+        class="signup-style"
         :model="signUpFormData"
         :rules="signUpRules"
       >
@@ -53,6 +56,8 @@
 
         <FormItem>
           <Button
+            ref="signUpBtn"
+            class="signup-btn"
             type="primary"
             shape="circle"
             long
@@ -79,6 +84,7 @@ export default {
       }
     }
     return {
+      signinPicture: require('../../../public/logo.png'),
       signUpFormData: {
         userName: '',
         userPasswd: '',
@@ -112,7 +118,17 @@ export default {
   methods: {
     // 注册按钮
     signUpBtn(signUpFormData) {
-      console.log(signUpFormData)
+      let btn = this.$refs.signUpBtn
+      let signUpBtn = document.querySelector('.signup-btn')
+      let x = btn.clientX - btn.target.offsetLeft
+      let y = btn.clientY - btn.target.offsetTop
+      let ripples = document.createElement('clickspan')
+      ripples.style.left = x + 'px'
+      ripples.style.top = y + 'px'
+      signUpBtn.appendChild(ripples)
+      setTimeout(() => {
+        ripples.remove()
+      }, 1000)
       this.$refs.formData.validate((valid) => {
         if (valid) {
           this.$axios({
@@ -131,8 +147,6 @@ export default {
               this.$Message.info('注册失败')
             }
           })
-        } else {
-          console.log(signUpFormData)
         }
       })
     },
@@ -141,54 +155,100 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.signUp-box {
+.signup-box {
   width: 300px;
   position: absolute;
   left: 50%;
   top: 50%;
   transform: translate(-50%, -70%);
-  .signUp-head {
+  .signup-head {
     width: 100%;
-    height: 100%;
+    height: 170px;
+    position: relative;
     text-align: center;
-    .signUp-title {
-      font-size: 65px;
+    .signup-picture {
+      width: 100px;
+      height: 100px;
+      position: absolute;
+      top: 10px;
+      left: 50%;
+      transform: translate(-50%); 
+      border-radius: 50%;
+      border: 1px solid #515a6e;
+      img {
+        width: 100%;
+      }
+    }
+    .signup-title {
+      position: absolute;
+      top: 110px;
+      left: 50%;
+      transform: translate(-50%); 
+      font-size: 20px;
       font-family: "Helvetica Neue", Helvetica, Arial, "PingFang SC",
         "Hiragino Sans GB", "Heiti SC", "Microsoft YaHei", "WenQuanYi Micro Hei",
         sansserif;
       font-weight: bolder;
       color: #515a6e;
     }
-    .signUp-title:hover {
+    .signup-title:hover {
       color: #515a6e;
     }
-    .go-login {
+    .go-signin {
       position: absolute;
       right: 10px;
-      top: 100px;
+      bottom: 0px;
       color: cornsilk;
     }
-    .go-login:hover {
+    .go-signin:hover {
       color: #00a2e8;
     }
   }
-  .signUp-form {
+  .signup-form {
     width: 100%;
     position: relative;
-    top: 40px;
+    top: 10px;
     // 使用::v-deep修改控制iview默认样式
-    .signUp-style ::v-deep .ivu-form-item {
+    .signup-style ::v-deep .ivu-form-item {
       height: 50px;
     }
-    .signUp-style ::v-deep .ivu-input {
+    .signup-style ::v-deep .ivu-input {
       border-radius: 25px;
       background-color: #fbfbfb;
       opacity: 0.9;
     }
-    .signUp-style ::v-deep .ivu-btn {
+    .signup-style ::v-deep .ivu-btn {
       position: absolute;
       top: 35px;
     }
+    .signup-style ::v-deep .signup-btn {
+      margin-top: 20px;
+      border: none;
+      overflow: hidden;
+      background: linear-gradient(90deg, #755bea, #ff72c0);
+      clickspan {
+        position: absolute;
+        background: #fff;
+        right: -100%;
+        top: -100%;
+        pointer-events: none;
+        border-radius: 50%;
+        animation: clickBtnAnimation 1s linear infinite;
+      }
+    }
+  }
+}
+
+@keyframes clickBtnAnimation {
+  0% {
+    width: 0px;
+    height: 0px;
+    opacity: 0.5;
+  }
+  100% {
+    width: 1000px;
+    height: 1000px;
+    opacity: 0;
   }
 }
 </style>

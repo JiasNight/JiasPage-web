@@ -1,19 +1,22 @@
 <template>
-  <div class="login-box">
+  <div class="signin-box">
     <!-- 标题 -->
-    <div class="login-head">
+    <div class="signin-head">
       <router-link to="/">
-        <span class="lgoin-title">J I A S</span>
+        <div class="signin-picture">
+          <img :src="signinPicture">
+        </div>
       </router-link>
+      <p class="signin-title">J I A S</p>
       <router-link to="/signup">
         <span class="is-account">没有账户？</span>
       </router-link>
     </div>
-    <div class="login-form">
+    <div class="signin-form">
       <!-- 登录表单 -->
       <Form
         ref="formData"
-        class="login-style"
+        class="signin-style"
         :model="loginFormData"
         :rules="loginRules"
       >
@@ -28,13 +31,13 @@
           >
           </Input>
         </FormItem>
-        <FormItem prop="userPasswd">
+        <FormItem prop="userPassword">
           <Input
             type="password"
             prefix="ios-lock-outline"
             size="large"
             password
-            v-model="loginFormData.userPasswd"
+            v-model="loginFormData.userPassword"
             placeholder="Password"
           >
           </Input>
@@ -63,41 +66,41 @@
         <a href="#" class="forget-passwd">忘记密码？</a>
         <FormItem>
           <Button
-            type="primary"
+            ref="signInBtn"
+            class="signin-btn"
             shape="circle"
             long
+            ghost
             size="large"
             @click="signInBtn(loginFormData)"
             >登录</Button
           >
         </FormItem>
       </Form>
-      <div class="login-other">
+      <div class="signin-other">
         <Divider>第三方登录</Divider>
-        <ul>
+        <div class="other-div">
           <a href="https://gitee.com/auth/github">
             <Tooltip content="使用github登录" placement="bottom-end">
-              <li><Icon type="logo-github" size="30" color="#000000" /></li>
+              <Icon type="logo-github" size="30" color="#000000" />
             </Tooltip>
           </a>
           <a href="https://gitee.com/auth/github">
             <Tooltip content="使用github登录" placement="bottom-end">
-              <li><Icon type="logo-apple" size="30" color="#000000" /></li>
+              <Icon type="logo-apple" size="30" color="#000000" />
             </Tooltip>
           </a>
           <a href="https://gitee.com/auth/github">
             <Tooltip content="使用github登录" placement="bottom-end">
-              <li>
-                <Icon type="logo-linkedin" size="30" color="#000000" />
-              </li>
+              <Icon type="logo-linkedin" size="30" color="#000000" />
             </Tooltip>
           </a>
           <a href="https://gitee.com/auth/github">
             <Tooltip content="使用github登录" placement="bottom-end">
-              <li><Icon type="logo-tux" size="30" color="#000000" /></li>
+              <Icon type="logo-tux" size="30" color="#000000" />
             </Tooltip>
           </a>
-        </ul>
+        </div>
       </div>
     </div>
   </div>
@@ -117,18 +120,19 @@ export default {
       }
     }
     return {
+      signinPicture: require('../../../public/logo.png'),
       isRemember: false, // 是否记住密码
       identifyCode: '',
       loginFormData: {
         userName: '',
-        userPasswd: '',
+        userPassword: '',
         identifyCode: '',
       },
       loginRules: {
         userName: [
           { required: true, message: '请输入登录用户名！', trigger: 'blur' },
         ],
-        userPasswd: [
+        userPassword: [
           { required: true, message: '请输入用户密码！', trigger: 'blur' },
           {
             type: 'string',
@@ -164,7 +168,7 @@ export default {
       document.cookie =
         'userName=' + name + ';path=/;expires=' + exdate.toLocaleString()
       document.cookie =
-        'userPasswd=' + pwd + ';path=/;expires=' + exdate.toLocaleString()
+        'userPassword=' + pwd + ';path=/;expires=' + exdate.toLocaleString()
     },
     // 获取cookie
     getCookie() {
@@ -177,8 +181,8 @@ export default {
           if (arr2[0] == 'userName') {
             // 保存到保存数据的地方
             this.loginFormData.userName = arr2[1]
-          } else if (arr2[0] == 'userPasswd') {
-            this.loginFormData.userPasswd = arr2[1]
+          } else if (arr2[0] == 'userPassword') {
+            this.loginFormData.userPassword = arr2[1]
           }
         }
       }
@@ -202,25 +206,35 @@ export default {
     },
     // 登录按钮
     signInBtn(loginFormData) {
+      let btn = this.$refs.signInBtn
+      let signInBtn = document.querySelector('.signin-btn')
+      let x = btn.clientX - btn.target.offsetLeft
+      let y = btn.clientY - btn.target.offsetTop
+      let ripples = document.createElement('clickspan')
+      ripples.style.left = x + 'px'
+      ripples.style.top = y + 'px'
+      signInBtn.appendChild(ripples)
+      setTimeout(() => {
+        ripples.remove()
+      }, 1000)
       this.$refs.formData.validate((valid) => {
         if (valid) {
           if (this.isRemember) {
-            this.setCookie(loginFormData.userName, loginFormData.userPasswd, 7)
+            this.setCookie(loginFormData.userName, loginFormData.userPassword, 7)
           } else {
             this.clearCookie()
           }
           this.$axios({
-            url: '/user/login',
+            url: '/user/signIn',
             method: 'post',
             params: {
               userName: loginFormData.userName,
-              userPasswd: loginFormData.userPasswd,
+              userPassword: loginFormData.userPassword,
             },
           }).then((res) => {
-            console.log(res.data)
             if (res.data.code === 200) {
-              localStorage.setItem('userName', loginFormData.userName)
-              this.$store.commit('saveUserName', loginFormData.userName)
+              // localStorage.setItem('userName', loginFormData.userName)
+              // this.$store.commit('saveUserName', loginFormData.userName)
               this.$Message.info('登录成功')
               this.$router.push('/')
             } else {
@@ -235,92 +249,141 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.login-box {
-  width: 300px;
+.signin-box {
   position: absolute;
+  width: 300px;
   left: 50%;
   top: 50%;
   transform: translate(-50%, -70%);
-  .login-head {
+  .signin-head {
     width: 100%;
-    height: 100%;
+    height: 170px;
+    position: relative;
     text-align: center;
-    .lgoin-title {
-      font-size: 65px;
+    .signin-picture {
+      width: 100px;
+      height: 100px;
+      position: absolute;
+      top: 10px;
+      left: 50%;
+      transform: translate(-50%); 
+      border-radius: 50%;
+      border: 1px solid #515a6e;
+      img {
+        width: 100%;
+      }
+    }
+    .signin-title {
+      position: absolute;
+      top: 110px;
+      left: 50%;
+      transform: translate(-50%); 
+      font-size: 20px;
       font-family: "Helvetica Neue", Helvetica, Arial, "PingFang SC",
         "Hiragino Sans GB", "Heiti SC", "Microsoft YaHei", "WenQuanYi Micro Hei",
         sansserif;
       font-weight: bolder;
       color: #515a6e;
     }
-    .lgoin-title:hover {
+    .signin-title:hover {
       color: #515a6e;
     }
     .is-account {
       position: absolute;
       right: 10px;
-      top: 100px;
+      bottom: 0px;
       color: cornsilk;
     }
     .is-account:hover {
       color: #00a2e8;
     }
   }
-  .login-form {
+  .signin-form {
     width: 100%;
     position: relative;
-    top: 40px;
+    top: 10px;
     // 使用::v-deep修改控制iview默认样式
-    .login-style ::v-deep .ivu-form-item {
+    .signin-style ::v-deep .ivu-form-item {
       height: 50px;
     }
-    .login-style ::v-deep .ivu-input {
+    .signin-style ::v-deep .ivu-input {
       border-radius: 25px;
       background-color: #fbfbfb;
       opacity: 0.9;
     }
-    .login-style ::v-deep .ivu-btn {
+    .signin-style ::v-deep .ivu-btn {
       position: absolute;
       top: 35px;
     }
-    .login-style .ver-code-input {
+    .signin-style .ver-code-input {
       width: 160px;
       display: inline-block;
     }
-    .login-style .ver-code {
+    .signin-style .ver-code {
       float: right;
       margin-right: 10px;
       cursor: pointer;
     }
     .remember-check {
       position: absolute;
+      margin-top: 10px;
       left: 20px;
     }
     .forget-passwd {
       position: absolute;
+      margin-top: 10px;
       right: 10px;
       color: #595959;
     }
     .forget-passwd:hover {
       color: #c9cccf;
     }
+    .signin-style ::v-deep .signin-btn {
+      margin-top: 20px;
+      border: none;
+      overflow: hidden;
+      background: linear-gradient(90deg, #755bea, #ff72c0);
+      clickspan {
+        position: absolute;
+        background: #fff;
+        right: -100%;
+        top: -100%;
+        pointer-events: none;
+        border-radius: 50%;
+        animation: clickBtnAnimation 1s linear infinite;
+      }
+    }
     // 第三方登录
-    .login-other {
+    .signin-other {
       width: 90%;
       position: absolute;
       left: 50%;
-      transform: translate(-50%, 10%);
-      ul {
-        list-style: none;
-        li {
+      transform: translate(-50%, 50%);
+      .other-div {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        align-items: center;
+        justify-items: center;
+        a {
           width: 30px;
           height: 30px;
-          float: left;
-          margin-left: 35px;
           border-radius: 50%;
         }
       }
     }
+  }
+}
+
+@keyframes clickBtnAnimation {
+  0% {
+    width: 0px;
+    height: 0px;
+    opacity: 0.5;
+  }
+  100% {
+    width: 1000px;
+    height: 1000px;
+    opacity: 0;
   }
 }
 </style>

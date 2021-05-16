@@ -38,52 +38,52 @@ export default {
       imgsList: [
         {
           src:
-            "https://demosc.chinaz.net/Files/DownLoad/webjs1/201806/jiaoben5973/images/1.png",
+            'https://demosc.chinaz.net/Files/DownLoad/webjs1/201806/jiaoben5973/images/1.png',
         },
         {
           src:
-            "https://demosc.chinaz.net/Files/DownLoad/webjs1/201806/jiaoben5973/images/2.png",
+            'https://demosc.chinaz.net/Files/DownLoad/webjs1/201806/jiaoben5973/images/2.png',
         },
         {
           src:
-            "https://demosc.chinaz.net/Files/DownLoad/webjs1/201806/jiaoben5973/images/3.png",
+            'https://demosc.chinaz.net/Files/DownLoad/webjs1/201806/jiaoben5973/images/3.png',
         },
         {
           src:
-            "https://demosc.chinaz.net/Files/DownLoad/webjs1/201806/jiaoben5973/images/4.png",
+            'https://demosc.chinaz.net/Files/DownLoad/webjs1/201806/jiaoben5973/images/4.png',
         },
         {
           src:
-            "https://demosc.chinaz.net/Files/DownLoad/webjs1/201806/jiaoben5973/images/5.png",
+            'https://demosc.chinaz.net/Files/DownLoad/webjs1/201806/jiaoben5973/images/5.png',
         },
       ],
       currentIndex: 0,
       dotsList: 5,
       showBtn: false,
       timer: null,
-    };
+    }
   },
   methods: {
     setClass(i) {
       let prev =
-        this.currentIndex === this.dotsList - 1 ? 0 : this.currentIndex + 1;
+        this.currentIndex === this.dotsList - 1 ? 0 : this.currentIndex + 1
       let next =
-        this.currentIndex === 0 ? this.dotsList - 1 : this.currentIndex - 1;
+        this.currentIndex === 0 ? this.dotsList - 1 : this.currentIndex - 1
       switch (i) {
         case this.currentIndex:
-          return "active";
+          return 'active'
         case next:
-          return "next";
+          return 'next'
         case prev:
-          return "prev";
+          return 'prev'
         default:
-          return "";
+          return ''
       }
     },
     setBGImg(src) {
       return {
         backgroundImage: `url(${src})`,
-      };
+      }
     },
     setActiveDot(index) {
       return index === this.currentIndex
@@ -91,26 +91,26 @@ export default {
             backgroundColor: this.color,
           }
         : {
-            backgroundColor: "#ccc",
-          };
+            backgroundColor: '#ccc',
+          }
     },
     prevBtn() {
       this.currentIndex =
-        this.currentIndex === 0 ? this.dotsList - 1 : this.currentIndex - 1;
+        this.currentIndex === 0 ? this.dotsList - 1 : this.currentIndex - 1
     },
     nextBtn() {
-      this.currentIndex = ++this.currentIndex % this.dotsList;
+      this.currentIndex = ++this.currentIndex % this.dotsList
     },
     imgPause() {
-      clearInterval(this.timer);
-      this.showBtn = true;
+      clearInterval(this.timer)
+      this.showBtn = true
     },
     imgPlay() {
-      this.timer = setInterval(this.nextBtn, 8000);
-      this.showBtn = false;
+      this.timer = setInterval(this.nextBtn, 8000)
+      this.showBtn = false
     },
   },
-};
+}
 </script>
 
 <style lang="scss" scoped>

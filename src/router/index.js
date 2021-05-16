@@ -1,10 +1,11 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
+import ViewUI from 'view-design'
 import Index from '../views/frontend/Index.vue'
 import Home from '../views/frontend/Home.vue'
-import adminIndex from '../views/backend/index.vue'
 
 Vue.use(VueRouter)
+Vue.use(ViewUI)
 
 const routes = [
   {
@@ -42,7 +43,7 @@ const routes = [
     // 后台路由
     path: '/admin',
     name: 'Admin',
-    component: adminIndex,
+    component: () => import('../views/backend/index.vue'),
     // 需要登录才能进入的页面可以增加一个meta属
     meta: {requireAuth: true},
     children: []
@@ -57,6 +58,7 @@ const router = new VueRouter({
 
 // 判断是否需要登录权限 以及是否登录
 router.beforeEach((to, from, next) => {
+  ViewUI.LoadingBar.start()
   // 判断是否需要登录权限
   if (to.matched.some(res => res.meta.requireAuth)) {
     // 判断是否登录
@@ -72,6 +74,11 @@ router.beforeEach((to, from, next) => {
   } else {
     next()
   }
+})
+
+router.afterEach(route => {
+  console.log(route)
+  ViewUI.LoadingBar.finish()
 })
 
 export default router

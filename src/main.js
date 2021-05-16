@@ -12,6 +12,9 @@ import ViewUI from 'view-design'
 import 'view-design/dist/styles/iview.css'
 // 导入全局样式文件
 import './assets/css/global.scss'
+import * as echarts from 'echarts'
+Vue.use(echarts)
+Vue.prototype.$echarts = echarts
 
 Vue.config.productionTip = false
 Vue.use(ViewUI)
